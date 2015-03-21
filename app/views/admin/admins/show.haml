@@ -1,0 +1,44 @@
+.page-header
+  .pull-left
+    %h1 Administrator
+  .pull-right
+    = link_to 'Edit', [:edit, :admin, @admin],
+      :class => 'btn btn-primary'
+    = link_to 'Delete', [:admin, @admin],
+      :method => :delete,
+      :data => {:confirm => 'Are you sure?'},
+      :class => 'btn btn-danger'
+    = link_to 'Back', [:admin, :admins],
+      :class => 'btn btn-default'
+
+  .clearfix
+
+- admin = @admin.decorate
+.col-md-8
+  %dl.dl-horizontal
+    %dt Name
+    %dd= admin
+
+    %dt Email
+    %dd= admin.email
+
+    %dt Status
+    %dd= admin.status
+
+.col-md-4
+  - unless @admin.confirmed?
+    = link_to 'Send confirmation email', '#', :class => 'btn btn-link'
+  - if current_user.id == @admin.id
+    = link_to 'Change Password', '#', :class => 'btn btn-link'
+  - else
+    = link_to 'Send reset password instructions', '#', :class => 'btn btn-link'
+    = form_for [:enable, :admin, @admin], :method => :put do |f|
+      - submit_text = 'Enable'
+      - value = false
+
+      - if @admin.active?
+        - submit_text = 'Disable'
+        - value = true
+
+      = f.hidden_field :disabled, :value => value
+      = f.submit "#{submit_text} Account", :class => 'btn btn-link'

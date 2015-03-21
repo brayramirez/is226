@@ -17,7 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -37,6 +37,15 @@ gem 'haml-rails', '~> 0.9.0'
 
 gem 'draper', '~> 1.4.0'
 
+gem 'devise', '~> 3.4.1'
+
+gem 'seedbank', '~> 0.3.0'
+
+gem 'reform', '~> 1.2.6'
+
+gem 'chosen-rails', '~> 1.4.1'
+
+
 group :development do
   gem 'thin', '~> 1.6.3'
   gem 'annotate', '~> 2.6.7'
@@ -51,5 +60,7 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'faker', '~> 1.4.3'
 end
 

@@ -1,0 +1,36 @@
+.page-header
+  .pull-left
+    %h1 My Account
+  .pull-right
+    = link_to 'Edit', [:edit, :bidder, :my_account],
+      :class => 'btn btn-primary'
+
+  .clearfix
+
+- account = current_user.decorate
+.col-md-8
+  %dl.dl-horizontal
+    %dt Name
+    %dd= account
+
+    %dt Email
+    %dd= account.email
+
+    %dt Company Name
+    %dd= account.company_name
+
+    %dt Categories
+    %dd= account.categories
+
+    %dt Contact Person
+    %dd= account.contact_person
+
+    %dt Contact Number
+    %dd= account.contact_number
+
+    %dt Status
+    %dd= account.status
+
+.col-md-4
+  = link_to 'Change Password', [:edit, :bidder, :password],
+    :class => 'btn btn-link'

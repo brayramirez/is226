@@ -1,0 +1,7 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .container
+    .navbar-header
+      = link_to 'IS226', [:root], :class => 'navbar-brand'
+
+    %ul.nav.navbar-nav.navbar-right
+      %li= link_to 'Login', new_user_session_path

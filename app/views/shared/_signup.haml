@@ -1,0 +1,99 @@
+-#
+-# locals:
+-#   form
+-#
+
+%h2.text-center Sign up
+
+= form_for form, :url => [:create, :account],
+  :html => {:method => :post, :class => 'form-horizontal'} do |f|
+
+  .form-group
+    = f.label :account_type, 'I am a', :class => 'control-label col-sm-4'
+
+    .radio.radio-inline
+      %label
+        = f.radio_button :account_type, :buyer,
+          :class => 'js-account-type',
+          :checked => :buyer == form.account_type.to_sym
+        Buyer
+
+    .radio.radio-inline
+      %label
+        = f.radio_button :account_type, :bidder,
+          :class => 'js-account-type',
+          :checked => :bidder == form.account_type.to_sym
+        Bidder
+
+  .js-buyer-type{:class => "#{'hidden' if :bidder == form.account_type.to_sym}"}
+    .form-group
+      = f.label :buyer_type, 'Type', :class => 'control-label col-sm-4'
+
+      .radio.radio-inline
+        %label
+          = f.radio_button :buyer_type, :business,
+            :checked => :business == form.buyer_type.to_sym
+          Business
+
+      .radio.radio-inline
+        %label
+          = f.radio_button :buyer_type, :individual,
+            :checked => :individual == form.buyer_type.to_sym
+          Individual
+
+  .js-bidder-category{:class => "#{'hidden' if :buyer == form.account_type.to_sym}"}
+    .form-group
+      = f.label :categories, :class => 'control-label col-sm-4'
+      .col-sm-8
+        = f.select :categories,
+          options_from_collection_for_select(Category.alphabetical,
+            'id', 'name', form.category_ids),
+          {:include_blank => true},
+          :multiple => true,
+          :class => 'js-chosen-select form-control',
+          :data => {:placeholder => 'Select Category'}
+
+  .form-group
+    = f.label :company_name, :class => 'control-label col-sm-4'
+    .col-sm-8{:class => "#{'has-error' if @form.errors[:company_name].present?}"}
+      = f.text_field :company_name, :class => 'form-control'
+
+  .form-group
+    = f.label :email, :class => 'control-label col-sm-4'
+    .col-sm-8{:class => "#{'has-error' if @form.errors[:email].present?}"}
+      = f.text_field :email, :class => 'form-control'
+
+  .form-group
+    = f.label :first_name, :class => 'control-label col-sm-4'
+    .col-sm-8{:class => "#{'has-error' if @form.errors[:first_name].present?}"}
+      = f.text_field :first_name, :class => 'form-control'
+
+  .form-group
+    = f.label :last_name, :class => 'control-label col-sm-4'
+    .col-sm-8{:class => "#{'has-error' if @form.errors[:last_name].present?}"}
+      = f.text_field :last_name, :class => 'form-control'
+
+  .form-group
+    = f.label :contact_person, :class => 'control-label col-sm-4'
+    .col-sm-8
+      = f.text_field :contact_person, :class => 'form-control'
+
+  .form-group
+    = f.label :contact_number, :class => 'control-label col-sm-4'
+    .col-sm-8
+      = f.text_field :contact_number, :class => 'form-control'
+
+  .form-group
+    = f.label :password, :class => 'control-label col-sm-4'
+    .col-sm-8{:class => "#{'has-error' if @form.errors[:password].present?}"}
+      = f.password_field :password, :class => 'form-control'
+
+  .form-group
+    = f.label :password_confirmation, 'Re-type Password',
+      :class => 'control-label col-sm-4'
+    .col-sm-8{:class => "#{'has-error' if @form.errors[:password_confirmation].present?}"}
+      = f.password_field :password_confirmation, :class => 'form-control'
+
+  .form-group
+    .col-sm-offset-4.col-sm-8
+      = f.submit 'Sign Up', :class => 'btn btn-primary col-sm-12'

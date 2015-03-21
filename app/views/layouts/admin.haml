@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+%html
+  %head
+    %title IS226 - Admin
+    = stylesheet_link_tag 'admin_base',
+      :media => 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    = render :partial => '/admin/shared/nav'
+
+    .container
+      .row
+        = render :partial => '/shared/notice'
+        = yield

@@ -1,4 +1,63 @@
 Rails.application.routes.draw do
+
+  devise_for :users, :controllers => {
+    :confirmations => 'users/confirmations',
+    :passwords => 'users/passwords',
+    :registrations => 'users/registrations',
+    :sessions => 'users/sessions'}
+
+
+  get '/', :to => 'home#new', :as => :new_account
+  post '/', :to => 'home#create', :as => :create_account
+
+  get '/restricted', :to => 'restricted#show'
+
+
+  namespace :admin do
+    resources :categories
+    resource :my_account, :only => [:show, :edit, :update]
+    resource :password, :only => [:edit, :update]
+
+    resources :admins do
+      member do
+        put 'enable'
+      end
+    end
+
+    resources :buyers do
+      member do
+        put 'enable'
+      end
+    end
+
+    resources :bidders do
+      member do
+        put 'enable'
+      end
+    end
+
+    root 'categories#index'
+  end
+
+
+  namespace :buyer do
+    resource :my_account, :only => [:show, :edit, :update]
+    resource :password, :only => [:edit, :update]
+    resources :dashboard, :only => [:index]
+
+
+    root 'dashboard#index'
+  end
+
+
+  namespace :bidder do
+    resource :my_account, :only => [:show, :edit, :update]
+    resource :password, :only => [:edit, :update]
+    resources :dashboard, :only => [:index]
+
+
+    root 'dashboard#index'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -21,7 +80,7 @@ Rails.application.routes.draw do
   #       post 'toggle'
   #     end
   #
-  #     collection do
+  #     collection dohttp://localhost:3000/users/confirmation/new
   #       get 'sold'
   #     end
   #   end
@@ -53,4 +112,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  root 'home#new'
+
 end

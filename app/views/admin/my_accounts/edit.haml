@@ -1,0 +1,27 @@
+.page-header
+  %h1 Edit My Account
+
+= form_for @account, :url => [:admin, :my_account],
+  :html => {:class => 'form-horizontal'} do |f|
+
+  .form-group
+    = f.label :email, :class => 'col-sm-2 control-label'
+    .col-sm-5
+      = f.text_field :email, :class => 'form-control', :readonly => true
+
+  .form-group
+    = f.label :first_name, :class => 'col-sm-2 control-label'
+    .col-sm-5
+      = f.text_field :first_name, :class => 'form-control'
+
+  .form-group
+    = f.label :last_name, :class => 'col-sm-2 control-label'
+    .col-sm-5
+      = f.text_field :last_name, :class => 'form-control'
+
+  %hr
+
+  .form-group
+    .col-sm-offset-2.col-sm-5
+      = f.submit 'Save', :class => 'btn btn-primary'
+      = link_to 'Cancel', [:admin, :my_account], :class => 'btn btn-default'

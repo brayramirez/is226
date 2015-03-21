@@ -1,0 +1,39 @@
+-#
+-# locals:
+-#   header
+-#   account
+-#
+
+
+- decorated_account = account.decorate
+.page-header
+  %h1= header
+
+.col-md-8
+  %dl.dl-horizontal
+    %dt Name
+    %dd= decorated_account
+
+    %dt Company
+    %dd= decorated_account.company_name
+
+    %dt Email
+    %dd= decorated_account.email
+
+    %dt Status
+    %dd= decorated_account.status
+
+.col-md-4
+  - unless account.confirmed?
+    = link_to 'Send confirmation email', '#', :class => 'btn btn-link'
+  = link_to 'Send reset password instructions', '#', :class => 'btn btn-link'
+  = form_for [:enable, :admin, account], :method => :put do |f|
+    - submit_text = 'Enable'
+    - value = false
+
+    - if account.active?
+      - submit_text = 'Disable'
+      - value = true
+
+    = f.hidden_field :disabled, :value => value
+    = f.submit "#{submit_text} Account", :class => 'btn btn-link'
