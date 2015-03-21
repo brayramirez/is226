@@ -1,4 +1,6 @@
-= form_for [:admin, admin], :html => {:class => 'form-horizontal'} do |f|
+= form_for [:admin, @admin], :as => :user,
+  :html => {:class => 'form-horizontal'} do |f|
+
   .form-group
     = f.label :email, :class => 'col-sm-2 control-label'
     .col-sm-5

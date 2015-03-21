@@ -21,18 +21,21 @@ Rails.application.routes.draw do
     resources :admins do
       member do
         put 'enable'
+        put 'reset_password'
       end
     end
 
     resources :buyers do
       member do
         put 'enable'
+        put 'reset_password'
       end
     end
 
     resources :bidders do
       member do
         put 'enable'
+        put 'reset_password'
       end
     end
 

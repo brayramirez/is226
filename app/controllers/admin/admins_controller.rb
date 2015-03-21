@@ -55,9 +55,18 @@ module Admin
 
 
     def enable
-      @admin.update_attributes params.require(:admin).permit(:disabled)
+      @admin.update_attributes params.require(:user).permit(:disabled)
       flash[:notice] = "Administrator Account #{@admin.disabled? ? 'disabled' : 'enabled'}."
 
+      redirect_to [:admin, @admin]
+    end
+
+
+    def reset_password
+      @admin = AdminAccount.find params[:id]
+      @admin.send_reset_password_instructions
+
+      flash[:success] = 'Password reset instructions has been sent.'
       redirect_to [:admin, @admin]
     end
 
@@ -73,7 +82,7 @@ module Admin
 
 
     def admin_params
-      params.require(:admin).permit :email, :last_name, :first_name
+      params.require(:user).permit :email, :last_name, :first_name
     end
 
   end

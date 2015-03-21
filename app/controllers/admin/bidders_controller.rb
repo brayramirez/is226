@@ -14,9 +14,18 @@ module Admin
 
 
     def enable
-      @bidder.update_attributes params.require(:bidder).permit(:disabled)
-      flash[:notice] = "Bidder Account #{@bidder.disabled? ? 'disabled' : 'enable'}."
+      @bidder.update_attributes params.require(:user).permit(:disabled)
+      flash[:notice] = "Bidder Account #{@bidder.disabled? ? 'disabled' : 'enabled'}."
 
+      redirect_to [:admin, @bidder]
+    end
+
+
+    def reset_password
+      @bidder = BidderAccount.find params[:id]
+      @bidder.send_reset_password_instructions
+
+      flash[:success] = 'Password reset instructions has been sent.'
       redirect_to [:admin, @bidder]
     end
 

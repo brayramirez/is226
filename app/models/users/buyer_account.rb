@@ -38,4 +38,9 @@ class BuyerAccount < User
 
   default_scope { where(:account_type => User.buyer_type) }
 
+
+  def self.model_name
+    ActiveModel::Name.new(self, nil, 'Buyer')
+  end
+
 end

@@ -27,12 +27,20 @@
 
 .col-md-4
   - unless @admin.confirmed?
-    = link_to 'Send confirmation email', '#', :class => 'btn btn-link'
-  - if current_user.id == @admin.id
-    = link_to 'Change Password', '#', :class => 'btn btn-link'
-  - else
-    = link_to 'Send reset password instructions', '#', :class => 'btn btn-link'
-    = form_for [:enable, :admin, @admin], :method => :put do |f|
+    = link_to 'Re-send confirmation email', '#',
+      :class => 'btn btn-link'
+
+  - if @admin.id != current_user.id
+    = form_for @admin,
+      :url => [:reset_password, :admin, @admin],
+      :method => :put do |f|
+
+      = f.submit 'Send reset password instructions', :class => 'btn btn-link'
+
+    = form_for @admin, :as => :user,
+      :url => [:enable, :admin, @admin],
+      :method => :put do |f|
+
       - submit_text = 'Enable'
       - value = false
 

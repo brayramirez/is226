@@ -26,8 +26,17 @@
 .col-md-4
   - unless account.confirmed?
     = link_to 'Send confirmation email', '#', :class => 'btn btn-link'
-  = link_to 'Send reset password instructions', '#', :class => 'btn btn-link'
-  = form_for [:enable, :admin, account], :method => :put do |f|
+
+  = form_for account,
+    :url => [:reset_password, :admin, account],
+    :method => :put do |f|
+
+    = f.submit 'Send reset password instructions', :class => 'btn btn-link'
+
+  = form_for account, :as => :user,
+    :url => [:enable, :admin, account],
+    :method => :put do |f|
+
     - submit_text = 'Enable'
     - value = false
 

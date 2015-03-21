@@ -38,4 +38,9 @@ class AdminAccount < User
 
   default_scope { where(:account_type => User.admin_type) }
 
+
+  def self.model_name
+    ActiveModel::Name.new(self, nil, 'Admin')
+  end
+
 end

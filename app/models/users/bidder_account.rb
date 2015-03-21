@@ -38,4 +38,9 @@ class BidderAccount < User
 
   default_scope { where(:account_type => User.bidder_type) }
 
+
+  def self.model_name
+    ActiveModel::Name.new(self, nil, 'Bidder')
+  end
+
 end

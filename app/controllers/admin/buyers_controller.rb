@@ -14,9 +14,18 @@ module Admin
 
 
     def enable
-      @buyer.update_attributes params.require(:buyer).permit(:disabled)
-      flash[:notice] = "Buyer Account #{@buyer.disabled? ? 'disabled' : 'enable'}."
+      @buyer.update_attributes params.require(:user).permit(:disabled)
+      flash[:notice] = "Buyer Account #{@buyer.disabled? ? 'disabled' : 'enabled'}."
 
+      redirect_to [:admin, @buyer]
+    end
+
+
+    def reset_password
+      @buyer = BuyerAccount.find params[:id]
+      @buyer.send_reset_password_instructions
+
+      flash[:success] = 'Password reset instructions has been sent.'
       redirect_to [:admin, @buyer]
     end
 
