@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     resource :my_account, :only => [:show, :edit, :update]
     resource :password, :only => [:edit, :update]
     resources :dashboard, :only => [:index]
-
+    resources :orders, :only => [:index, :show, :new, :create, :edit, :update]
 
     root 'dashboard#index'
   end

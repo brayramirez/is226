@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
 
   def restrict_page
-    redirect_to [:restricted]
+    raise ActionController::RoutingError.new('Not Found')
   end
 
 

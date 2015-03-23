@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   enum :buyer_type => [:business, :individual] unless instance_methods.include? :buyer_type
 
 
+  has_many :orders
   has_and_belongs_to_many :categories, :join_table => :bidder_categories,
     :foreign_key => :user_id
 
