@@ -1,0 +1,15 @@
+-#
+-# locals:
+-#   order
+-#
+
+.form-group
+  .col-sm-12
+    = f.text_area :content, :class => 'form-control', :rows => 6
+
+%hr
+
+.form-group
+  .col-sm-6
+    = f.submit 'Save', :class => 'btn btn-primary'
+    = link_to 'Cancel', [:bidder, order], :class => 'btn btn-default'

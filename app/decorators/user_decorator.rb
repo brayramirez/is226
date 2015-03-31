@@ -3,12 +3,6 @@ class UserDecorator < ApplicationDecorator
   BUYER_TYPE = ['Business', 'Individual']
 
 
-  def to_s
-    "#{source.first_name} #{source.last_name}"
-  end
-  alias_method :name, :to_s
-
-
   def status
     source.disabled? ? 'Disabled' : 'Active'
   end

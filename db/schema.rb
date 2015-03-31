@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323150310) do
+ActiveRecord::Schema.define(version: 20150331162139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,11 +24,33 @@ ActiveRecord::Schema.define(version: 20150323150310) do
   add_index "bidder_categories", ["category_id"], name: "index_bidder_categories_on_category_id", using: :btree
   add_index "bidder_categories", ["user_id"], name: "index_bidder_categories_on_user_id", using: :btree
 
+  create_table "bids", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "bidder_id"
+    t.text     "content",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "bids", ["bidder_id"], name: "index_bids_on_bidder_id", using: :btree
+  add_index "bids", ["order_id"], name: "index_bids_on_order_id", using: :btree
+
   create_table "categories", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "bid_id"
+    t.integer  "commenter_id"
+    t.text     "content",      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "comments", ["bid_id"], name: "index_comments_on_bid_id", using: :btree
+  add_index "comments", ["commenter_id"], name: "index_comments_on_commenter_id", using: :btree
 
   create_table "order_categories", force: :cascade do |t|
     t.integer "order_id"

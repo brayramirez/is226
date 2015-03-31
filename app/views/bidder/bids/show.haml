@@ -1,0 +1,40 @@
+- order = @bid.order.decorate
+
+.col-md-12
+  .panel{:class => order.panel_class}
+    .panel-heading
+      .pull-left Your Bid
+      .pull-right
+        = link_to 'Back', [:bidder, @bid.order],
+          :class => 'btn btn-default btn-xs'
+
+      .clearfix
+
+    .panel-body
+      = @bid
+
+.col-md-12
+  .panel{:class => order.panel_class}
+    .panel-heading Comments
+    .panel-body
+      .js-comments-container
+        - if @bid.comments.any?
+          - @bid.comments.each do |comment|
+            .js-comment
+              = comment.content
+        - else
+          .js-no-comments
+            %h4 No Comments for this bid yet.
+
+      %hr
+      = form_for [:bidder, @bid, @bid.comments.new],
+        :html => {:class => 'form-horizontal'},
+        :remote => true do |f|
+
+        .form-group
+          .col-sm-12
+            = f.text_area :content, :class => 'form-control'
+
+        .form-group
+          .col-sm-6
+            = f.submit 'Post comment', :class => 'btn btn-primary'

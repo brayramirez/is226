@@ -1,8 +1,9 @@
 module Buyer
   class OrdersController < Buyer::BaseController
 
-    before_action :init_order, :only => [:show, :edit, :update]
-    before_action :init_form, :only => [:new, :create]
+    before_action :init_order, :only => [:show, :edit, :update, :close]
+    before_action :init_new_form, :only => [:new, :create]
+    before_action :init_edit_form, :only => [:edit, :update]
 
 
     def index
@@ -48,6 +49,14 @@ module Buyer
     end
 
 
+    def close
+      @order.close!
+
+      flash[:notice] = 'Order closed.'
+      redirect_to [:buyer, @order]
+    end
+
+
 
 
 
@@ -58,8 +67,13 @@ module Buyer
     end
 
 
-    def init_form
+    def init_new_form
       @form = OrderForm.new current_user.orders.build
+    end
+
+
+    def init_edit_form
+      @form = OrderForm.new @order
     end
 
   end

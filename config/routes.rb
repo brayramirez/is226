@@ -47,7 +47,11 @@ Rails.application.routes.draw do
     resource :my_account, :only => [:show, :edit, :update]
     resource :password, :only => [:edit, :update]
     resources :dashboard, :only => [:index]
-    resources :orders, :only => [:index, :show, :new, :create, :edit, :update]
+    resources :orders, :only => [:index, :show, :new, :create, :edit, :update] do
+      member do
+        put 'close'
+      end
+    end
 
     root 'dashboard#index'
   end
@@ -57,7 +61,13 @@ Rails.application.routes.draw do
     resource :my_account, :only => [:show, :edit, :update]
     resource :password, :only => [:edit, :update]
     resources :dashboard, :only => [:index]
+    resources :orders, :only => [:index, :show] do
+      resources :bids, :only => [:new, :create]
+    end
 
+    resources :bids, :only => [:show, :edit, :update] do
+      resources :comments, :only => [:create]
+    end
 
     root 'dashboard#index'
   end

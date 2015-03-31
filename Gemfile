@@ -45,6 +45,8 @@ gem 'reform', '~> 1.2.6'
 
 gem 'chosen-rails', '~> 1.4.1'
 
+gem 'bootstrap-datepicker-rails', '~> 1.4.0'
+
 
 group :development do
   gem 'thin', '~> 1.6.3'

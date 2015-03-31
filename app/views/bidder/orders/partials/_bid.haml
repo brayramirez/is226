@@ -1,0 +1,29 @@
+-#
+-# locals:
+-#   order
+-#
+- has_bid = order.has_bid? current_user
+- if has_bid
+  - bid = order.bid_by current_user
+
+.col-md-12
+  .panel{:class => order.panel_class}
+    .panel-heading
+      .pull-left Your Bid
+      .pull-right
+        - if has_bid
+          = link_to 'View',
+            [:bidder, bid],
+            :class => 'btn btn-info btn-xs'
+          = link_to 'Edit',
+            [:edit, :bidder, bid],
+            :class => 'btn btn-default btn-xs'
+      .clearfix
+    .panel-body
+      - if has_bid
+        = raw bid
+      - else
+        %h4 You don't have a bid for this order.
+        %hr
+        = link_to 'Make a Bid', [:new, :bidder, order, :bid],
+          :class => 'btn btn-primary'
