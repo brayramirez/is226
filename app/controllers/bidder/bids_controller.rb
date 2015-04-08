@@ -3,7 +3,9 @@ module Bidder
 
     before_action :init_order, :only => [:new, :create]
     before_action :init_new_bid, :only => [:new, :create]
-    before_action :init_bid, :only => [:show, :edit, :update]
+    before_action :init_bid,
+      :only => [:show, :edit, :update, :withdraw, :reopen]
+    before_action :init_bid_support, :only => [:withdraw, :reopen]
 
 
     def show
@@ -38,6 +40,20 @@ module Bidder
     end
 
 
+    def withdraw
+      @support.withdraw
+
+      redirect_to [:bidder, @bid.order]
+    end
+
+
+    def reopen
+      @support.reopen
+
+      redirect_to [:bidder, @bid.order]
+    end
+
+
 
 
 
@@ -49,12 +65,17 @@ module Bidder
 
 
     def init_new_bid
-      @bid = @order.bids.new :bidder_id => current_user.id
+      @bid = @order.bids.new :bidder => current_user
     end
 
 
     def init_bid
       @bid = Bid.find params[:id]
+    end
+
+
+    def init_bid_support
+      @support = BiddingSupport.new @bid
     end
 
 

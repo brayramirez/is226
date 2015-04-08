@@ -3,22 +3,15 @@
 .col-md-12
   .panel{:class => panel_class}
     .panel-heading
-      .pull-left Your Bid
+      .pull-left Bid by #{@bid.bidder}
       .pull-right
-        = link_to 'Back', [:bidder, @bid.order],
-          :class => 'btn btn-default btn-xs'
-        - if @bid.open?
-          = link_to 'Withdraw',
-            [:withdraw, :bidder, @bid],
-            :class => 'btn btn-danger btn-xs',
-            :method => :put,
-            :data => {:confirm => "Are you sure you want to withdraw your bid?"}
-        - elsif @bid.withdrawed?
-          = link_to 'Re-open',
-            [:reopen, :bidder, @bid],
+        - if !@bid.order.closed? && @bid.open?
+          = link_to 'Award Order', [:award, :buyer, @bid],
             :class => 'btn btn-success btn-xs',
             :method => :put,
-            :data => {:confirm => "Are you sure you want to withdraw your bid?"}
+            :data => {:confirm => "Are you sure you want to award this Order to #{@bid.bidder}?"}
+        = link_to 'Back', [:buyer, @bid.order],
+          :class => 'btn btn-default btn-xs'
 
       .clearfix
 
@@ -30,8 +23,7 @@
     .panel-heading Comments
     .panel-body
       - if !@bid.order.closed? && @bid.open?
-        = render :partial => 'bidder/comments/new',
-          :locals => {:bid => @bid}
+        = render :partial => 'buyer/comments/new', :locals => {:bid => @bid}
 
         %hr
 

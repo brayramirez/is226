@@ -29,6 +29,9 @@ class Order < ActiveRecord::Base
   belongs_to :user
 
   has_many :bids, :dependent => :destroy
+  has_one :awarded_bid,
+    -> { where :status => Bid.statuses[:awarded] },
+    :class_name => 'Bid'
   has_and_belongs_to_many :categories, :join_table => :order_categories,
     :foreign_key => :order_id, :dependent => :destroy
 
@@ -44,7 +47,7 @@ class Order < ActiveRecord::Base
 
 
   def self.closed_status
-    Order.status[:closed]
+    Order.statuses[:closed]
   end
 
 
@@ -89,7 +92,7 @@ class Order < ActiveRecord::Base
 
 
   def no_of_bids
-    0 # TODO: Update accordingly
+    self.bids.count
   end
 
 

@@ -45,11 +45,18 @@ class User < ActiveRecord::Base
   enum :buyer_type => [:business, :individual] unless instance_methods.include? :buyer_type
 
 
-  has_many :orders, :dependent => :destroy
-  has_many :bids, :dependent => :destroy
-  has_many :comments, :dependent => :destroy
-  has_and_belongs_to_many :categories, :join_table => :bidder_categories,
-    :foreign_key => :user_id, :dependent => :destroy
+  has_many :orders,
+    :dependent => :destroy
+  has_many :bids,
+    :foreign_key => :bidder_id,
+    :dependent => :destroy
+  has_many :comments,
+    :foreign_key => :commenter_id,
+    :dependent => :destroy
+  has_and_belongs_to_many :categories,
+    :join_table => :bidder_categories,
+    :foreign_key => :user_id,
+    :dependent => :destroy
 
 
   scope :admin, -> { where(:account_type => User.admin_type) }

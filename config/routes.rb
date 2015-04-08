@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     :registrations => 'users/registrations',
     :sessions => 'users/sessions'}
 
+  devise_scope :user do
+    put "/users/confirmation" => "users/confirmations#update"
+  end
+
 
   get '/', :to => 'home#new', :as => :new_account
   post '/', :to => 'home#create', :as => :create_account
@@ -47,9 +51,19 @@ Rails.application.routes.draw do
     resource :my_account, :only => [:show, :edit, :update]
     resource :password, :only => [:edit, :update]
     resources :dashboard, :only => [:index]
-    resources :orders, :only => [:index, :show, :new, :create, :edit, :update] do
+    resources :orders,
+      :only => [:index, :show, :new, :create, :edit, :update] do
+
       member do
         put 'close'
+      end
+    end
+
+    resources :bids, :only => [:show] do
+      resources :comments, :only => [:create]
+
+      member do
+        put 'award'
       end
     end
 
@@ -67,6 +81,11 @@ Rails.application.routes.draw do
 
     resources :bids, :only => [:show, :edit, :update] do
       resources :comments, :only => [:create]
+
+      member do
+        put 'withdraw'
+        put 'reopen'
+      end
     end
 
     root 'dashboard#index'

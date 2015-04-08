@@ -39,7 +39,13 @@
         %dt Details
         %dd= order.details
 
-.col-md-12
-  .panel{:class => order.panel_class}
-    .panel-heading Bids
-    .panel-body
+- if order.bids.any?
+  = render :partial => 'buyer/orders/partials/bid',
+    :collection => order.bids,
+    :locals => {:order => order}
+- else
+  .col-md-12
+    .panel{:class => order.panel_class}
+      .panel-heading Bids
+      .panel-body
+        %h4 No bids have been made yet.

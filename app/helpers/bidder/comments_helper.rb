@@ -1,0 +1,2 @@
+module Bidder::CommentsHelper
+end

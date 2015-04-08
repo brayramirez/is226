@@ -1,0 +1,24 @@
+%h2 Resend confirmation instructions
+
+= form_for resource,
+  :as => resource_name,
+  :url => confirmation_path(resource_name),
+  :html => {:method => :post, :class => 'form-inline'} do |f|
+
+  = devise_error_messages!
+
+  .form-group
+    .input-group
+      .input-group-addon
+        %i.glyphicon.glyphicon-envelope
+      = f.email_field :email,
+        :placeholder => 'Email Address',
+        :class => 'form-control',
+        :autofocus => true
+
+  = f.submit 'Resend confirmation instructions',
+    :class => 'btn btn-primary'
+
+%hr
+
+= render 'devise/shared/links'

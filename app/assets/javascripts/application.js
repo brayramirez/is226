@@ -15,4 +15,6 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require chosen-jquery
+//= require handlebars
+//= require_tree ./templates
 //= require_tree .

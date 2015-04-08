@@ -20,4 +20,7 @@ class Comment < ActiveRecord::Base
   belongs_to :bid
   belongs_to :commenter, :class_name => 'User'
 
+
+  scope :recent, -> { order('created_at DESC') }
+
 end

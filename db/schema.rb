@@ -27,9 +27,10 @@ ActiveRecord::Schema.define(version: 20150331162139) do
   create_table "bids", force: :cascade do |t|
     t.integer  "order_id"
     t.integer  "bidder_id"
-    t.text     "content",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "content",                null: false
+    t.integer  "status",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "bids", ["bidder_id"], name: "index_bids_on_bidder_id", using: :btree

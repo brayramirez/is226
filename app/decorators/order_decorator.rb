@@ -8,7 +8,15 @@ class OrderDecorator < ApplicationDecorator
 
 
   def status
-    STATUS[Order.statuses[source.status]]
+    display = STATUS[Order.statuses[source.status]]
+    return display unless source.awarded?
+
+    "#{display} to #{order.awarded_bid.bidder}"
+  end
+
+
+  def budget
+    h.number_with_delimiter source.budget
   end
 
 

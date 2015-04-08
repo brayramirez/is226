@@ -1,4 +1,9 @@
 class Users::ConfirmationsController < Devise::ConfirmationsController
+
+  before_action :init_user_from_mail, :only => [:show]
+  before_action :init_user, :only => [:update]
+  before_action :init_form, :only => [:show, :update]
+
   # GET /resource/confirmation/new
   # def new
   #   super
@@ -10,9 +15,46 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # end
 
   # GET /resource/confirmation?confirmation_token=abcdef
-  # def show
-  #   super
-  # end
+  def show
+    redirect_to [:root] unless @user
+    super if @user.non_admin?
+  end
+
+
+  def update
+    if @form.validate params[:user]
+      @form.save
+
+      redirect_to new_user_session_path
+    else
+      render :show
+    end
+  end
+
+
+
+
+
+  private
+
+  def init_user_from_mail
+    confirmation_token =
+      Devise.token_generator.digest User,
+        :confirmation_token,
+        params[:confirmation_token]
+
+    @user = User.where(:confirmation_token => confirmation_token).first
+  end
+
+
+  def init_user
+    @user = User.where(:confirmation_token => params[:user][:confirmation_token]).first
+  end
+
+
+  def init_form
+    @form = ConfirmPasswordForm.new @user
+  end
 
   # protected
 
