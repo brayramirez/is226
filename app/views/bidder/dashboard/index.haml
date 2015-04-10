@@ -1,1 +1,57 @@
-%h1 Welcome Bidder
+.row
+  .col-md-6
+    .panel.panel-primary
+      .panel-heading Open Orders for the last 7 days
+      %table.table.table-condensed.table-striped.table-hover
+        %thead
+          %tr
+            %th Item
+            %th Buyer
+            %th Created At
+            %th # of Bids
+        %tbody
+          - 10.times do |i|
+            %tr
+              %td= link_to Faker::Commerce.product_name, '#'
+              %td= Faker::Company.name
+              %td= i.days.ago.strftime '%B %-d, %Y'
+              %td= rand 5
+
+    .panel.panel-primary
+      .panel-heading Open Orders with bids made
+      %table.table.table-condensed.table-striped.table-hover
+        %thead
+          %tr
+            %th Item
+            %th Buyer
+            %th Created At
+        %tbody
+          - 3.times do |i|
+            %tr
+              %td= link_to Faker::Commerce.product_name, '#'
+              %td= Faker::Company.name
+              %td= i.days.ago.strftime '%B %-d, %Y'
+
+    .panel.panel-primary
+      .panel-heading Orders Awarded to you
+      %table.table.table-condensed.table-striped.table-hover
+        %thead
+          %tr
+            %th Item
+            %th Buyer
+        %tbody
+          - 3.times do |i|
+            %tr
+              %td= link_to Faker::Commerce.product_name, '#'
+              %td= Faker::Company.name
+
+  .col-md-6
+    .panel.panel-primary
+      .panel-heading Activities for the last 7 Days
+      %ul.list-group
+        - 10.times do |i|
+          - action = ["You made a bid for item <strong>#{Faker::Commerce.product_name}</strong>.",
+                      "You posted a comment to your bid for item <strong>#{Faker::Commerce.product_name}</strong>.",
+                      "<strong>#{Faker::Company.name}</strong> posted a comment to your bid for item <strong>#{Faker::Commerce.product_name}</strong>."]
+          %li.list-group-item
+            = raw action.sample
