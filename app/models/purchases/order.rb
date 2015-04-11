@@ -52,8 +52,8 @@ class Order < ActiveRecord::Base
   end
 
 
-  def self.recent_week
-    where "updated_at >= ?", 7.days.ago
+  def self.under_category ids
+    joins(:categories).where('categories.id IN (?)', ids).uniq
   end
 
 

@@ -12,7 +12,7 @@
         %tbody
           - 10.times do |i|
             %tr
-              %td= link_to Faker::Commerce.product_name, '#'
+              %td= Faker::Commerce.product_name
               %td= Faker::Company.name
               %td= i.days.ago.strftime '%B %-d, %Y'
               %td= rand 5
@@ -28,7 +28,7 @@
         %tbody
           - 3.times do |i|
             %tr
-              %td= link_to Faker::Commerce.product_name, '#'
+              %td= Faker::Commerce.product_name
               %td= Faker::Company.name
               %td= i.days.ago.strftime '%B %-d, %Y'
 
@@ -42,7 +42,7 @@
         %tbody
           - 3.times do |i|
             %tr
-              %td= link_to Faker::Commerce.product_name, '#'
+              %td= Faker::Commerce.product_name
               %td= Faker::Company.name
 
   .col-md-6

@@ -11,7 +11,7 @@
         %tbody
           - 5.times do |i|
             %tr
-              %td= link_to Faker::Commerce.product_name, '#'
+              %td= Faker::Commerce.product_name
               %td= i.days.ago.strftime '%B %-d, %Y'
               %td= rand 5
 
@@ -25,7 +25,7 @@
         %tbody
           - 3.times do |i|
             %tr
-              %td= link_to Faker::Commerce.product_name, '#'
+              %td= Faker::Commerce.product_name
               %td= Faker::Company.name
 
   .col-md-6
@@ -33,6 +33,6 @@
       .panel-heading Activities for the last 7 Days
       %ul.list-group
         - 10.times do |i|
-          - action = ["<strong>#{Faker::Company.name}</strong> has made a bid for item <strong>#{Faker::Commerce.product_name}</strong>.", "<strong>#{Faker::Company.name}</strong> posted a comment to a bid for item <strong>#{Faker;:Commerce.product_name}</strong>.", "You posted a comment to a bid for item <strong>#{Faker::Commerce.product_name}</strong>."]
+          - action = ["<strong>#{Faker::Company.name}</strong> has made a bid for item <strong>#{Faker::Commerce.product_name}</strong>.", "<strong>#{Faker::Company.name}</strong> posted a comment to a bid for item <strong>#{Faker::Commerce.product_name}</strong>.", "You posted a comment to a bid for item <strong>#{Faker::Commerce.product_name}</strong>."]
           %li.list-group-item
             = raw action.sample
