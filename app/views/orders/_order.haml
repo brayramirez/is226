@@ -1,0 +1,11 @@
+-#
+-# locals:
+-#   order
+-#   account
+-#
+
+%tr
+  %td= link_to order, [account, order]
+  %td= order.status
+  %td= order.created_at
+  %td= order.bids.count

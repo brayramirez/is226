@@ -1,0 +1,17 @@
+-#
+-# locals:
+-#   orders
+-#   account
+-#
+
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Item
+      %th Status
+      %th Created At
+      %th # of Bids
+  %tbody
+    = render :partial => 'orders/order',
+      :collection => orders,
+      :locals => {:account => account}

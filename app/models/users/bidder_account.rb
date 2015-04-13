@@ -43,4 +43,9 @@ class BidderAccount < User
     ActiveModel::Name.new(self, nil, 'Bidder')
   end
 
+
+  def orders_with_bids
+    Order.open.where :id => self.bids.pluck(:order_id)
+  end
+
 end

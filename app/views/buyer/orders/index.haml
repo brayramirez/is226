@@ -7,18 +7,6 @@
 
   .clearfix
 
-%table.table.table-condensed.table-striped.table-hover
-  %thead
-    %tr
-      %th Item
-      %th Status
-      %th Created At
-      %th # of Bids
-      %th
-  %tbody
-    - @orders.decorate.each do |order|
-      %tr
-        %td= link_to order, [:buyer, order]
-        %td= order.status
-        %td= order.created_at
-        %td= order.no_of_bids
+= render :partial => 'orders/list',
+  :locals => {:orders => @orders.decorate,
+    :account => :buyer}

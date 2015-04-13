@@ -22,8 +22,8 @@ class Order < ActiveRecord::Base
 
   enum :status => [:open, :awarded, :closed] unless instance_methods.include? :status
 
-  scope :by_latest, -> { order('created_at DESC') }
-  scope :recent_week, -> { where 'updated_at >= ?', 7.days.ago }
+  scope :by_latest, -> { order('orders.created_at DESC') }
+  scope :recent_week, -> { by_latest.where 'orders.created_at >= ?', 7.days.ago }
   scope :open, -> { where :status => self.open_status }
 
 
@@ -89,11 +89,6 @@ class Order < ActiveRecord::Base
 
   def editable?
     self.open? && self.no_of_bids == 0
-  end
-
-
-  def no_of_bids
-    self.bids.count
   end
 
 

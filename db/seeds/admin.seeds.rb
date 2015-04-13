@@ -1,10 +1,12 @@
-print 'Creating Admin'
+print 'Seeding Admin'
 
-Admin.create :email => 'admin@user.com',
-  :password => 'p@$$w0rd',
-  :password_confirmation => 'p@$$w0rd',
-  :first_name => 'Admin',
-  :last_name => 'Account'
+admin =
+  AdminAccount.new :email => 'admin@is226.com',
+    :password => 'password',
+    :first_name => 'Admin',
+    :last_name => 'Account'
+admin.skip_confirmation!
+admin.save
 
 print '.'
 
