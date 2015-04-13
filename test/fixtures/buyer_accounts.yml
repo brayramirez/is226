@@ -1,0 +1,17 @@
+# == Schema Information
+#
+# Table name: buyer_accounts
+#
+#  id         :integer          not null, primary key
+#  buyer_type :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  integer: 
+
+two:
+  integer: 

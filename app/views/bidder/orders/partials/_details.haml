@@ -1,0 +1,37 @@
+-#
+-# locals:
+-#   order
+-#
+
+.col-md-6
+  .panel{:class => order.panel_class}
+    .panel-heading
+      .pull-left Order Detail: #{order}
+      .pull-right
+        = link_to 'Back', [:bidder, :orders],
+          :class => 'btn btn-default btn-xs'
+
+      .clearfix
+
+    .panel-body
+      %dl.dl-horizontal
+        %dt Status
+        %dd= order.status
+
+        %dt Categories
+        %dd= order.categories
+
+        %dt Quantity
+        %dd= order.quantity
+
+        %dt Budget
+        %dd= order.budget
+
+        %dt Date Created
+        %dd= order.created_at
+
+        %dt Target Date
+        %dd= order.target
+
+        %dt Details
+        %dd= order.details

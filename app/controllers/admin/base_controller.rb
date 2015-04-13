@@ -24,7 +24,7 @@ class Admin::BaseController < BaseController
 
 
   def not_admin?
-    puts 'NOT ADMIN!!'
+    puts 'NOT ADMIN??'
     puts !current_user.admin?
 
     !current_user.admin?

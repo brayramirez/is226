@@ -13,4 +13,10 @@ class BaseController < ApplicationController
     end
   end
 
+
+  def current_role
+    current_user.role if current_user
+  end
+  helper_method :current_role
+
 end

@@ -1,25 +1,17 @@
 class AccountForm < UserForm
 
-  # property :account_type_name, :virtual => true
-  property :account_type
-
-  # property :buyer_type_name, :virtual => true
-  property :buyer_type
+  ROLES = {:buyer => BuyerAccount, :bidder => BidderAccount}
 
   property :company_name
   property :contact_person
   property :contact_number
 
   property :categories, :virtual => true
-  property :category_ids, :readable => false
+  property :account_type, :virtual => true
+  property :buyer_type, :virtual => true
 
   validate :presence_of_categories
   validate :presence_of_company_name
-
-
-  def categories= ids = []
-    self.category_ids = ids
-  end
 
 
   def account_type
@@ -32,12 +24,9 @@ class AccountForm < UserForm
   end
 
 
-  def category_ids
-    super || model.category_ids
-  end
-
-
   def save
+    self.model.role = self.assign_role if self.model.new_record?
+
     super
   end
 
@@ -48,7 +37,7 @@ class AccountForm < UserForm
   protected
 
   def presence_of_categories
-    if self.account_type.to_sym == :bidder && self.category_ids.blank?
+    if self.account_type.to_sym == :bidder && self.categories.blank?
       errors.add(:categories, 'is required')
     end
   end
@@ -60,6 +49,16 @@ class AccountForm < UserForm
 
       errors.add(:company_name, 'is required')
     end
+  end
+
+
+  def assign_role
+    role = ROLES[self.account_type.to_sym].new
+    role.category_ids = self.categories if role.is_a? BidderAccount
+    role.buyer_type = self.buyer_type if role.is_a? BuyerAccount
+    role.save
+
+    role
   end
 
 end

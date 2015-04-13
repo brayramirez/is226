@@ -1,7 +1,8 @@
 print 'Seeding Admin'
 
+role = AdminAccount.create
 admin =
-  AdminAccount.new :email => 'admin@is226.com',
+  role.build_user :email => 'admin@is226.com',
     :password => 'password',
     :first_name => 'Admin',
     :last_name => 'Account'

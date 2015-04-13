@@ -65,7 +65,7 @@ module Bidder
 
 
     def init_new_bid
-      @bid = @order.bids.new :bidder => current_user
+      @bid = @order.bids.new :bidder_account => current_role
     end
 
 

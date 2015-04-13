@@ -31,7 +31,7 @@ module Bidder
     private
 
     def init_form
-      @form = AccountForm.new current_user
+      @form = EditBidderForm.new current_user
     end
 
   end

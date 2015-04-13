@@ -1,6 +1,6 @@
 .row
   .col-md-4.col-md-offset-4
-    = flash[:success]
+    = render 'shared/notice'
 
     = form_for resource, :as => resource_name,
       :url => session_path(resource_name),

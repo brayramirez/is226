@@ -1,0 +1,22 @@
+-#
+-# locals:
+-#   orders
+-#
+
+.panel.panel-primary
+  .panel-heading Orders Awarded to you
+  - if orders.present?
+    %table.table.table-condensed.table-striped.table-hover
+      %thead
+        %tr
+          %th Item
+          %th Buyer
+          %th Created At
+      %tbody
+        - orders.each do |order|
+          %tr
+            %td= order
+            %td= order.user
+            %td= order.created_at
+  - else
+    .panel-body No Orders awarded yet.

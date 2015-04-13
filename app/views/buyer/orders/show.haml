@@ -13,31 +13,13 @@
         - if order.open?
           = link_to 'Close Order', [:close, :buyer, order],
             :class => 'btn btn-danger btn-xs',
-            :method => :put
+            :method => :put,
+            :data => {:confirm => 'Are you sure you want to close this order?'}
 
       .clearfix
     .panel-body
-      %dl.dl-horizontal
-        %dt Status
-        %dd= order.status
-
-        %dt Categories
-        %dd= order.categories
-
-        %dt Quantity
-        %dd= order.quantity
-
-        %dt Budget
-        %dd= order.budget
-
-        %dt Date Created
-        %dd= order.created_at
-
-        %dt Target Date
-        %dd= order.target
-
-        %dt Details
-        %dd= order.details
+      = render :partial => 'buyer/orders/partials/details',
+        :locals => {:order => order}
 
 - if order.bids.any?
   = render :partial => 'buyer/orders/partials/bid',

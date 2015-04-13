@@ -21,80 +21,47 @@
 #  updated_at             :datetime
 #  first_name             :string           not null
 #  last_name              :string           not null
-#  account_type           :integer          default(0), not null
 #  company_name           :string
 #  contact_person         :string
 #  contact_number         :string
-#  buyer_type             :integer          default(0), not null
 #  disabled               :boolean          default(FALSE)
+#  role_id                :integer
+#  role_type              :string
 #
 # Indexes
 #
-#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_confirmation_token     (confirmation_token) UNIQUE
+#  index_users_on_reset_password_token   (reset_password_token) UNIQUE
+#  index_users_on_role_id_and_role_type  (role_id,role_type)
 #
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
-  # :rememberable, :trackable, :validatable, :registerable
-  devise :database_authenticatable, :confirmable, :recoverable
+  # :rememberable, :trackable, :registerable
+  devise :database_authenticatable, :confirmable, :recoverable, :validatable
 
 
-  enum :account_type => [:buyer, :bidder, :admin] unless instance_methods.include? :account_type
-  enum :buyer_type => [:business, :individual] unless instance_methods.include? :buyer_type
+  belongs_to :role, :polymorphic => true
 
-
-  has_many :orders,
-    :dependent => :destroy
-  has_many :bids,
-    :foreign_key => :bidder_id,
-    :dependent => :destroy
+  # has_many :orders, :dependent => :destroy
+  # has_many :bids,
+  #   :foreign_key => :bidder_id,
+  #   :dependent => :destroy
   has_many :comments,
     :foreign_key => :commenter_id,
     :dependent => :destroy
-  has_and_belongs_to_many :categories,
-    :join_table => :bidder_categories,
-    :foreign_key => :user_id,
-    :dependent => :destroy
-
-
-  scope :admin, -> { where(:account_type => User.admin_type) }
-  scope :buyer, -> { where(:account_type => User.buyer_type) }
-  scope :bidder, -> { where(:account_type => User.bidder_type) }
 
   scope :alphabetical, -> { order('last_name ASC, first_name ASC') }
+  scope :admins, -> { where(:role_type => AdminAccount.to_s) }
+  scope :buyers, -> { where(:role_type => BuyerAccount.to_s) }
+  scope :bidders, -> { where(:role_type => BidderAccount.to_s) }
 
 
   # Validations
   validates :email, :presence => true, :uniqueness => true
   validates :last_name, :presence => true
   validates :first_name, :presence => true
-
-
-  def self.admin_type
-    User.account_types[:admin]
-  end
-
-
-  def self.buyer_type
-    User.account_types[:buyer]
-  end
-
-
-  def self.bidder_type
-    User.account_types[:bidder]
-  end
-
-
-  def self.business_type
-    User.buyer_types[:business]
-  end
-
-
-  def self.individual_type
-    User.buyer_types[:individual]
-  end
 
 
   def to_s
@@ -104,17 +71,17 @@ class User < ActiveRecord::Base
 
 
   def admin?
-    User.account_types[self.account_type] == User.admin_type
+    self.role.is_a? AdminAccount
   end
 
 
   def buyer?
-    User.account_types[self.account_type] == User.buyer_type
+    self.role.is_a? BuyerAccount
   end
 
 
   def bidder?
-    User.account_types[self.account_type] == User.bidder_type
+    self.role.is_a? BidderAccount
   end
 
 

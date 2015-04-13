@@ -11,30 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331162139) do
+ActiveRecord::Schema.define(version: 20150413060002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bidder_categories", force: :cascade do |t|
-    t.integer "user_id"
+  create_table "admin_accounts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bidder_account_categories", force: :cascade do |t|
+    t.integer "bidder_account_id"
     t.integer "category_id"
   end
 
-  add_index "bidder_categories", ["category_id"], name: "index_bidder_categories_on_category_id", using: :btree
-  add_index "bidder_categories", ["user_id"], name: "index_bidder_categories_on_user_id", using: :btree
+  add_index "bidder_account_categories", ["bidder_account_id"], name: "index_bidder_account_categories_on_bidder_account_id", using: :btree
+  add_index "bidder_account_categories", ["category_id"], name: "index_bidder_account_categories_on_category_id", using: :btree
+
+  create_table "bidder_accounts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "bids", force: :cascade do |t|
     t.integer  "order_id"
-    t.integer  "bidder_id"
-    t.text     "content",                null: false
-    t.integer  "status",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "bidder_account_id"
+    t.text     "content",                       null: false
+    t.integer  "status",            default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
-  add_index "bids", ["bidder_id"], name: "index_bids_on_bidder_id", using: :btree
+  add_index "bids", ["bidder_account_id"], name: "index_bids_on_bidder_account_id", using: :btree
   add_index "bids", ["order_id"], name: "index_bids_on_order_id", using: :btree
+
+  create_table "buyer_accounts", force: :cascade do |t|
+    t.integer  "buyer_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       null: false
@@ -62,18 +78,18 @@ ActiveRecord::Schema.define(version: 20150331162139) do
   add_index "order_categories", ["order_id"], name: "index_order_categories_on_order_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "item",                                             null: false
-    t.integer  "quantity",                           default: 0
-    t.decimal  "budget",     precision: 8, scale: 2, default: 0.0
+    t.integer  "buyer_account_id"
+    t.string   "item",                                                   null: false
+    t.integer  "quantity",                                 default: 0
+    t.decimal  "budget",           precision: 8, scale: 2, default: 0.0
     t.date     "target"
     t.text     "details"
-    t.integer  "status",                             default: 0
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.integer  "status",                                   default: 0
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+  add_index "orders", ["buyer_account_id"], name: "index_orders_on_buyer_account_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -94,15 +110,16 @@ ActiveRecord::Schema.define(version: 20150331162139) do
     t.datetime "updated_at"
     t.string   "first_name",                             null: false
     t.string   "last_name",                              null: false
-    t.integer  "account_type",           default: 0,     null: false
     t.string   "company_name"
     t.string   "contact_person"
     t.string   "contact_number"
-    t.integer  "buyer_type",             default: 0,     null: false
     t.boolean  "disabled",               default: false
+    t.integer  "role_id"
+    t.string   "role_type"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id", "role_type"], name: "index_users_on_role_id_and_role_type", using: :btree
 
 end

@@ -9,4 +9,4 @@
 
 = render :partial => 'orders/list',
   :locals => {:orders => @orders.decorate,
-    :account => :buyer}
+    :account => :buyer, :show_status => true}

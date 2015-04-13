@@ -1,32 +1,10 @@
 .row
   .col-md-6
-    .panel.panel-primary
-      .panel-heading Open Orders for the last 7 days
-      %table.table.table-condensed.table-striped.table-hover
-        %thead
-          %tr
-            %th Item
-            %th Created At
-            %th # of Bids
-        %tbody
-          - 5.times do |i|
-            %tr
-              %td= Faker::Commerce.product_name
-              %td= i.days.ago.strftime '%B %-d, %Y'
-              %td= rand 5
+    = render :partial => 'buyer/dashboard/partials/orders',
+      :locals => {:orders => @orders.decorate}
 
-    .panel.panel-primary
-      .panel-heading Awarded Orders for the last 7 days
-      %table.table.table-condensed.table-striped.table-hover
-        %thead
-          %tr
-            %th Item
-            %th Awarded To
-        %tbody
-          - 3.times do |i|
-            %tr
-              %td= Faker::Commerce.product_name
-              %td= Faker::Company.name
+    = render :partial => 'buyer/dashboard/partials/awarded_orders',
+      :locals => {:orders => @awarded_orders.decorate}
 
   .col-md-6
     .panel.panel-primary

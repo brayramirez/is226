@@ -7,7 +7,7 @@ module Buyer
 
 
     def index
-      @orders = current_user.orders.by_latest
+      @orders = current_role.orders.by_latest
     end
 
 
@@ -24,7 +24,7 @@ module Buyer
         @form.save
 
         flash[:success] = 'Order successfully created.'
-        redirect_to [:buyer, :orders]
+        redirect_to [:buyer, @form.model]
       else
         flash[:error] = @form.errors.full_messages
         render :new
@@ -63,12 +63,12 @@ module Buyer
     private
 
     def init_order
-      @order = current_user.orders.find params[:id]
+      @order = current_role.orders.find params[:id]
     end
 
 
     def init_new_form
-      @form = OrderForm.new current_user.orders.build
+      @form = OrderForm.new current_role.orders.build
     end
 
 

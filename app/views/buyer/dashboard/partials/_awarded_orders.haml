@@ -1,0 +1,16 @@
+.panel.panel-primary
+  .panel-heading Awarded Orders for the last 7 days
+
+  - if orders.present?
+    %table.table.table-condensed.table-striped.table-hover
+      %thead
+        %tr
+          %th Item
+          %th Awarded To
+      %tbody
+        - orders.each do |order|
+          %tr
+            %td= link_to order, [:buyer, order]
+            %td= order.awardee
+  - else
+    .panel-body No Awarded Orders for the last 7 days

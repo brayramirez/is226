@@ -1,0 +1,28 @@
+-#
+-# locals:
+-#   order
+-#   client
+-#
+
+.col-md-6
+  .panel{:class => order.panel_class}
+    .panel-heading Client Details
+    .panel-body
+      %dl.dl-horizontal
+        %dt Name
+        %dd= client
+
+        %dt Email
+        %dd= client.email
+
+        %dt Type
+        %dd= client.buyer_type
+
+        %dt Company Name
+        %dd= client.company_name
+
+        %dt Contact Person
+        %dd= client.contact_person
+
+        %dt Contact Number
+        %dd= client.contact_number

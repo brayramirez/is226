@@ -21,12 +21,12 @@
         %td= admin.first_name
         %td= admin.email
         %td
-          = link_to 'Show', [:admin, admin],
+          = link_to 'Show', [:admin, admin.role],
             :class => 'btn btn-default btn-sm'
-          = link_to 'Edit', [:edit, :admin, admin],
+          = link_to 'Edit', [:edit, :admin, admin.role],
             :class => 'btn btn-primary btn-sm'
           - unless current_user.id == admin.id
-            = link_to 'Delete', [:admin, admin],
+            = link_to 'Delete', [:admin, admin.role],
               :method => :delete,
               :data => {:confirm => 'Are you sure?'},
               :class => 'btn btn-danger btn-sm'

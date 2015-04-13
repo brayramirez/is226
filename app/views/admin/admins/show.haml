@@ -2,12 +2,13 @@
   .pull-left
     %h1 Administrator
   .pull-right
-    = link_to 'Edit', [:edit, :admin, @admin],
+    = link_to 'Edit', [:edit, :admin, @admin.role],
       :class => 'btn btn-primary'
-    = link_to 'Delete', [:admin, @admin],
-      :method => :delete,
-      :data => {:confirm => 'Are you sure?'},
-      :class => 'btn btn-danger'
+    - unless current_user.id == @admin.id
+      = link_to 'Delete', [:admin, @admin.role],
+        :method => :delete,
+        :data => {:confirm => 'Are you sure?'},
+        :class => 'btn btn-danger'
     = link_to 'Back', [:admin, :admins],
       :class => 'btn btn-default'
 
@@ -27,18 +28,19 @@
 
 .col-md-4
   - unless @admin.confirmed?
-    = link_to 'Re-send confirmation email', '#',
+    = link_to 'Re-send confirmation email',
+      [:resend_confirmation, :admin, @admin.role],
+      :method => :put,
       :class => 'btn btn-link'
 
   - if @admin.id != current_user.id
-    = form_for @admin,
-      :url => [:reset_password, :admin, @admin],
-      :method => :put do |f|
-
-      = f.submit 'Send reset password instructions', :class => 'btn btn-link'
+    = link_to 'Send reset password instructions',
+      [:reset_password, :admin, @admin.role],
+      :method => :put,
+      :class => 'btn btn-link'
 
     = form_for @admin, :as => :user,
-      :url => [:enable, :admin, @admin],
+      :url => [:enable, :admin, @admin.role],
       :method => :put do |f|
 
       - submit_text = 'Enable'

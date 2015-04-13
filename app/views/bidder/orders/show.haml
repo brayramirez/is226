@@ -1,59 +1,10 @@
 - order = @order.decorate
 
-.col-md-6
-  .panel{:class => order.panel_class}
-    .panel-heading
-      .pull-left Order Detail: #{order}
-      .pull-right
-        = link_to 'Back', [:bidder, :orders],
-          :class => 'btn btn-default btn-xs'
+= render :partial => 'bidder/orders/partials/details',
+  :locals => {:order => order}
 
-      .clearfix
-
-    .panel-body
-      %dl.dl-horizontal
-        %dt Status
-        %dd= order.status
-
-        %dt Categories
-        %dd= order.categories
-
-        %dt Quantity
-        %dd= order.quantity
-
-        %dt Budget
-        %dd= order.budget
-
-        %dt Date Created
-        %dd= order.created_at
-
-        %dt Target Date
-        %dd= order.target
-
-        %dt Details
-        %dd= order.details
-
-.col-md-6
-  .panel{:class => order.panel_class}
-    .panel-heading Client Details
-    .panel-body
-      - client = order.user.decorate
-
-      %dl.dl-horizontal
-        %dt Name
-        %dd= client
-
-        %dt Email
-        %dd= client.email
-
-        %dt Company Name
-        %dd= client.company_name
-
-        %dt Contact Person
-        %dd= client.contact_person
-
-        %dt Contact Number
-        %dd= client.contact_number
+= render :partial => 'bidder/orders/partials/client_details',
+  :locals => {:order => order, :client => order.user.decorate}
 
 = render :partial => 'bidder/orders/partials/bid',
   :locals => {:order => order}

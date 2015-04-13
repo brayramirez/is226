@@ -2,20 +2,20 @@
 #
 # Table name: orders
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  item       :string           not null
-#  quantity   :integer          default(0)
-#  budget     :decimal(8, 2)    default(0.0)
-#  target     :date
-#  details    :text
-#  status     :integer          default(0)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id               :integer          not null, primary key
+#  buyer_account_id :integer
+#  item             :string           not null
+#  quantity         :integer          default(0)
+#  budget           :decimal(8, 2)    default(0.0)
+#  target           :date
+#  details          :text
+#  status           :integer          default(0)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 # Indexes
 #
-#  index_orders_on_user_id  (user_id)
+#  index_orders_on_buyer_account_id  (buyer_account_id)
 #
 
 class Order < ActiveRecord::Base
@@ -25,9 +25,10 @@ class Order < ActiveRecord::Base
   scope :by_latest, -> { order('orders.created_at DESC') }
   scope :recent_week, -> { by_latest.where 'orders.created_at >= ?', 7.days.ago }
   scope :open, -> { where :status => self.open_status }
+  scope :awarded, -> { where :status => self.awarded_status }
 
 
-  belongs_to :user
+  belongs_to :buyer_account
 
   has_many :bids, :dependent => :destroy
   has_one :awarded_bid,
@@ -63,7 +64,7 @@ class Order < ActiveRecord::Base
 
 
   def bid_by bidder
-    self.bids.where(:bidder_id => bidder.id).first
+    self.bids.where(:bidder_account_id => bidder.id).first
   end
 
 
@@ -88,12 +89,22 @@ class Order < ActiveRecord::Base
 
 
   def editable?
-    self.open? && self.no_of_bids == 0
+    self.open? && self.bids.count == 0
   end
 
 
   def close!
     self.update_attributes :status => :closed
+  end
+
+
+  def awardee
+    self.awarded_bid.bidder_account
+  end
+
+
+  def user
+    self.buyer_account.user
   end
 
 end

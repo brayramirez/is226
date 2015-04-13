@@ -21,5 +21,5 @@
         %td= account.first_name
         %td= account.email
         %td
-          = link_to 'Show', [:admin, account],
+          = link_to 'Show', [:admin, account.role],
             :class => 'btn btn-default btn-sm'

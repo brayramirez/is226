@@ -35,7 +35,6 @@ class ApplicationController < ActionController::Base
 
 
 
-
   private
 
   def choose_layout

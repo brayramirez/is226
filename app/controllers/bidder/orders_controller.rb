@@ -2,7 +2,7 @@ module Bidder
   class OrdersController < Bidder::BaseController
 
     def index
-      @orders = Order.open.under_category current_user.category_ids
+      @orders = current_role.open_orders
     end
 
 

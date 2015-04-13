@@ -6,18 +6,8 @@
     = render :partial => 'bidder/dashboard/partials/bid_orders',
       :locals => {:orders => @orders_with_bids.decorate}
 
-    .panel.panel-primary
-      .panel-heading Orders Awarded to you
-      %table.table.table-condensed.table-striped.table-hover
-        %thead
-          %tr
-            %th Item
-            %th Buyer
-        %tbody
-          - 3.times do |i|
-            %tr
-              %td= Faker::Commerce.product_name
-              %td= Faker::Company.name
+    = render :partial => 'bidder/dashboard/partials/awarded_orders',
+      :locals => {:orders => @awarded_orders.decorate}
 
   .col-md-6
     .panel.panel-primary

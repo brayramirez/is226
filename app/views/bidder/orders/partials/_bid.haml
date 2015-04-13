@@ -4,9 +4,9 @@
 -#
 
 - panel_class = order.panel_class
-- has_bid = order.has_bid? current_user
+- has_bid = order.has_bid? current_role
 - if has_bid
-  - bid = order.bid_by current_user
+  - bid = order.bid_by current_role
   - panel_class = bid.decorate.panel_class
 
 .col-md-12

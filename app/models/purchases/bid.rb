@@ -2,18 +2,18 @@
 #
 # Table name: bids
 #
-#  id         :integer          not null, primary key
-#  order_id   :integer
-#  bidder_id  :integer
-#  content    :text             not null
-#  status     :integer          default(0)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                :integer          not null, primary key
+#  order_id          :integer
+#  bidder_account_id :integer
+#  content           :text             not null
+#  status            :integer          default(0)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 # Indexes
 #
-#  index_bids_on_bidder_id  (bidder_id)
-#  index_bids_on_order_id   (order_id)
+#  index_bids_on_bidder_account_id  (bidder_account_id)
+#  index_bids_on_order_id           (order_id)
 #
 
 class Bid < ActiveRecord::Base
@@ -22,7 +22,7 @@ class Bid < ActiveRecord::Base
 
 
   belongs_to :order
-  belongs_to :bidder, :class_name => 'User'
+  belongs_to :bidder_account
   has_many :comments, :dependent => :destroy
 
 
@@ -59,5 +59,11 @@ class Bid < ActiveRecord::Base
   def to_s
     self.content
   end
+
+
+  def user
+    self.bidder_account.user
+  end
+  alias_method :bidder, :user
 
 end

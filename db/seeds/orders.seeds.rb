@@ -1,4 +1,4 @@
-after :buyer do
+after :buyers do
   print 'Seeding Orders'
 
   BuyerAccount.find_each do |buyer|

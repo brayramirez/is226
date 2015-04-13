@@ -1,0 +1,15 @@
+-#
+-# locals:
+-#   orders
+-#   account
+-#
+
+.panel.panel-primary
+  .panel-heading Open Orders for the last 7 days
+
+  - if orders.present?
+    = render :partial => 'orders/list',
+      :locals => {:orders => orders,
+        :account => :buyer}
+  - else
+    .panel-body No Open Orders in the last 7 days

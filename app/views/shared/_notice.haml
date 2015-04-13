@@ -1,6 +1,6 @@
--#
--# locals
--#
+- if flash[:alert]
+  .alert.alert-danger
+    = flash[:alert]
 
 - if flash[:success]
   .alert.alert-success
@@ -12,6 +12,6 @@
 
 - if flash[:error]
   .alert.alert-danger
-    %ul
+    %ul.list-unstyled
       = list_of flash[:error] do |error|
         = error
