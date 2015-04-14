@@ -13,6 +13,7 @@ module Bidder
 
 
     def new
+      restrict_order @order
     end
 
 
@@ -28,6 +29,7 @@ module Bidder
 
 
     def edit
+      restrict_order @bid.order
     end
 
 
@@ -81,6 +83,14 @@ module Bidder
 
     def bid_params
       params.require(:bid).permit(:content)
+    end
+
+
+    def restrict_order order
+      return if order.editable?
+
+      flash[:error] = "Order is already #{order.decorate.simple_status} and no bids can be made."
+      redirect_to [:bidder, order]
     end
 
   end

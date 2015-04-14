@@ -1,0 +1,19 @@
+-#
+-# locals:
+-#   bid
+-#   panel_class
+-#
+
+.col-md-12
+  .panel{:class => panel_class}
+    .panel-heading Comments
+    .panel-body
+      - if !bid.order.closed? && bid.open?
+        = render :partial => 'bidder/comments/new',
+          :locals => {:bid => bid}
+
+        %hr
+
+      = render :partial => 'comments/comments',
+        :locals => {:comments => bid.comments}
+

@@ -23,7 +23,7 @@ class Order < ActiveRecord::Base
   enum :status => [:open, :awarded, :closed] unless instance_methods.include? :status
 
   scope :by_latest, -> { order('orders.created_at DESC') }
-  scope :recent_week, -> { by_latest.where 'orders.created_at >= ?', 7.days.ago }
+  scope :recent_week, -> { by_latest.where 'DATE(orders.created_at) >= ?', 7.days.ago.to_date }
   scope :open, -> { where :status => self.open_status }
   scope :awarded, -> { where :status => self.awarded_status }
 
@@ -93,13 +93,18 @@ class Order < ActiveRecord::Base
   end
 
 
+  def non_editable?
+    self.closed? || self.awarded?
+  end
+
+
   def close!
     self.update_attributes :status => :closed
   end
 
 
   def awardee
-    self.awarded_bid.bidder_account
+    self.awarded_bid.bidder_account.user
   end
 
 

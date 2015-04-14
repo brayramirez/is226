@@ -15,7 +15,7 @@
       %tbody
         - orders.each do |order|
           %tr
-            %td= order
+            %td= link_to order, [:bidder, order]
             %td= order.user
             %td= order.created_at
   - else

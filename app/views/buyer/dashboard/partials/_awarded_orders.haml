@@ -7,10 +7,12 @@
         %tr
           %th Item
           %th Awarded To
+          %th Company
       %tbody
         - orders.each do |order|
           %tr
             %td= link_to order, [:buyer, order]
             %td= order.awardee
+            %td= order.awardee.company_name
   - else
     .panel-body No Awarded Orders for the last 7 days

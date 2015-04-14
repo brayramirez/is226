@@ -33,6 +33,10 @@ module Buyer
 
 
     def edit
+      if @order.non_editable?
+        flash[:error] = "Order is already #{@order.decorate.simple_status} and is no longer editable."
+        redirect_to [:buyer, @order]
+      end
     end
 
 

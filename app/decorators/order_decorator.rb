@@ -1,10 +1,16 @@
 class OrderDecorator < ApplicationDecorator
 
+  SIMPLE_STATUS = ['open', 'awarded', 'closed']
   STATUS = ['Open',
             'Awarded',
             'Closed (This order is no longer editable and no bidding can be made.)']
 
   PANEL_CLASS = ['panel-primary', 'panel-success', 'panel-default']
+
+
+  def simple_status
+    SIMPLE_STATUS[Order.statuses[source.status]]
+  end
 
 
   def status

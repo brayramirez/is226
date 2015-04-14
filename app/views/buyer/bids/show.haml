@@ -18,23 +18,5 @@
     .panel-body
       = @bid
 
-.col-md-12
-  .panel{:class => panel_class}
-    .panel-heading Comments
-    .panel-body
-      - if !@bid.order.closed? && @bid.open?
-        = render :partial => 'buyer/comments/new', :locals => {:bid => @bid}
-
-        %hr
-
-      .js-comments-container
-        - if @bid.comments.any?
-          - @bid.comments.recent.each do |comment|
-            .comment
-              .well.well-sm
-                %blockquote
-                  %p= comment.content
-                  %footer= comment.commenter
-        - else
-          .js-no-comments
-            %h4 No Comments for this bid yet.
+= render :partial => 'comments/comment_panel',
+  :locals => {:bid => @bid, :panel_class => panel_class}

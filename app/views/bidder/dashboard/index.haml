@@ -1,21 +1,22 @@
 .row
-  .col-md-6
-    = render :partial => 'bidder/dashboard/partials/week_orders',
-      :locals => {:orders => @orders.decorate}
+  .col-md-12
+    .col-md-6
+      = render :partial => 'bidder/dashboard/partials/week_orders',
+        :locals => {:orders => @orders.decorate}
 
-    = render :partial => 'bidder/dashboard/partials/bid_orders',
-      :locals => {:orders => @orders_with_bids.decorate}
+      = render :partial => 'bidder/dashboard/partials/bid_orders',
+        :locals => {:orders => @orders_with_bids.decorate}
 
-    = render :partial => 'bidder/dashboard/partials/awarded_orders',
-      :locals => {:orders => @awarded_orders.decorate}
+      = render :partial => 'bidder/dashboard/partials/awarded_orders',
+        :locals => {:orders => @awarded_orders.decorate}
 
-  .col-md-6
-    .panel.panel-primary
-      .panel-heading Activities for the last 7 Days
-      %ul.list-group
-        - 10.times do |i|
-          - action = ["You made a bid for item <strong>#{Faker::Commerce.product_name}</strong>.",
-                      "You posted a comment to your bid for item <strong>#{Faker::Commerce.product_name}</strong>.",
-                      "<strong>#{Faker::Company.name}</strong> posted a comment to your bid for item <strong>#{Faker::Commerce.product_name}</strong>."]
-          %li.list-group-item
-            = raw action.sample
+    .col-md-6
+      .panel.panel-primary
+        .panel-heading Activities for the last 7 Days
+        %ul.list-group
+          - 10.times do |i|
+            - action = ["You made a bid for item <strong>#{Faker::Commerce.product_name}</strong>.",
+                        "You posted a comment to your bid for item <strong>#{Faker::Commerce.product_name}</strong>.",
+                        "<strong>#{Faker::Company.name}</strong> posted a comment to your bid for item <strong>#{Faker::Commerce.product_name}</strong>."]
+            %li.list-group-item
+              = raw action.sample
