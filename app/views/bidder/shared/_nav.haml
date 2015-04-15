@@ -4,13 +4,15 @@
       = link_to 'IS226', [:bidder, :root], :class => 'navbar-brand'
 
     %ul.nav.navbar-nav.navbar-left
-      %li= link_to 'Orders', [:bidder, :orders]
-
-    %ul.nav.navbar-nav.navbar-right
       %li.dropdown
-        = link_to UserDecorator.decorate(current_user), '#',
+        = link_to "Orders <span class='caret'></span>".html_safe, '#',
           :class => 'dropdown-toggle',
           :data => {:toggle => 'dropdown'}
         %ul.dropdown-menu
-          %li= link_to 'My Account', [:bidder, :my_account]
-          %li= link_to 'Log out', destroy_user_session_path, :method => :delete
+          %li= link_to 'Open', '#'
+          %li= link_to 'Awarded', '#'
+          %li= link_to 'Categorized', [:bidder, :orders]
+          %li= link_to 'All', '#'
+
+    = render :partial => 'shared/my_account_nav',
+      :locals => {:account => :bidder}
