@@ -1,5 +1,6 @@
 -#
 -# locals:
+-#   account
 -#   bid
 -#   panel_class
 -#
@@ -9,8 +10,8 @@
     .panel-heading Comments
     .panel-body
       - if !bid.order.closed? && bid.open?
-        = render :partial => 'bidder/comments/new',
-          :locals => {:bid => bid}
+        = render :partial => 'comments/form',
+          :locals => {:bid => bid, :account => account}
 
         %hr
 

@@ -19,4 +19,6 @@
       = @bid
 
 = render :partial => 'comments/comment_panel',
-  :locals => {:bid => @bid, :panel_class => panel_class}
+  :locals => {:bid => @bid,
+    :panel_class => panel_class,
+    :account => :buyer}
