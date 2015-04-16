@@ -6,45 +6,47 @@
 
 
 - decorated_account = account.decorate
-.page-header
-  %h1= header
 
-.col-md-8
-  %dl.dl-horizontal
-    %dt Name
-    %dd= decorated_account
+.col-md-12
+  .page-header
+    %h1= header
 
-    %dt Company
-    %dd= decorated_account.company_name
+  .col-md-8
+    %dl.dl-horizontal
+      %dt Name
+      %dd= decorated_account
 
-    %dt Email
-    %dd= decorated_account.email
+      %dt Company
+      %dd= decorated_account.company_name
 
-    %dt Status
-    %dd= decorated_account.status
+      %dt Email
+      %dd= decorated_account.email
 
-.col-md-4
-  - unless account.confirmed?
-    = link_to 'Send confirmation email',
-      [:resend_confirmation, :admin, account.role],
+      %dt Status
+      %dd= decorated_account.status
+
+  .col-md-4
+    - unless account.confirmed?
+      = link_to 'Send confirmation email',
+        [:resend_confirmation, :admin, account.role],
+        :method => :put,
+        :class => 'btn btn-link'
+
+    = link_to 'Send reset password instructions',
+      [:reset_password, :admin, account.role],
       :method => :put,
       :class => 'btn btn-link'
 
-  = link_to 'Send reset password instructions',
-    [:reset_password, :admin, account.role],
-    :method => :put,
-    :class => 'btn btn-link'
+    = form_for account, :as => :user,
+      :url => [:enable, :admin, account.role],
+      :method => :put do |f|
 
-  = form_for account, :as => :user,
-    :url => [:enable, :admin, account.role],
-    :method => :put do |f|
+      - submit_text = 'Enable'
+      - value = false
 
-    - submit_text = 'Enable'
-    - value = false
+      - if account.active?
+        - submit_text = 'Disable'
+        - value = true
 
-    - if account.active?
-      - submit_text = 'Disable'
-      - value = true
-
-    = f.hidden_field :disabled, :value => value
-    = f.submit "#{submit_text} Account", :class => 'btn btn-link'
+      = f.hidden_field :disabled, :value => value
+      = f.submit "#{submit_text} Account", :class => 'btn btn-link'

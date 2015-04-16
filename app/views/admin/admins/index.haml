@@ -1,32 +1,33 @@
-.page-header
-  .pull-left
-    %h1 Administrators
-  .pull-right
-    = link_to '+ New', [:new, :admin, :admin],
-      :class => 'btn btn-primary'
+.col-md-12
+  .page-header
+    .pull-left
+      %h1 Administrators
+    .pull-right
+      = link_to '+ New', [:new, :admin, :admin],
+        :class => 'btn btn-primary'
 
-  .clearfix
+    .clearfix
 
-%table.table.table-condensed.table-striped.table-hover
-  %thead
-    %tr
-      %th Last Name
-      %th First Name
-      %th Email
-      %th
-  %tbody
-    - @admins.each do |admin|
+  %table.table.table-condensed.table-striped.table-hover
+    %thead
       %tr
-        %td= admin.last_name
-        %td= admin.first_name
-        %td= admin.email
-        %td
-          = link_to 'Show', [:admin, admin.role],
-            :class => 'btn btn-default btn-sm'
-          = link_to 'Edit', [:edit, :admin, admin.role],
-            :class => 'btn btn-primary btn-sm'
-          - unless current_user.id == admin.id
-            = link_to 'Delete', [:admin, admin.role],
-              :method => :delete,
-              :data => {:confirm => 'Are you sure?'},
-              :class => 'btn btn-danger btn-sm'
+        %th Last Name
+        %th First Name
+        %th Email
+        %th
+    %tbody
+      - @admins.each do |admin|
+        %tr
+          %td= admin.last_name
+          %td= admin.first_name
+          %td= admin.email
+          %td
+            = link_to 'Show', [:admin, admin.role],
+              :class => 'btn btn-default btn-sm'
+            = link_to 'Edit', [:edit, :admin, admin.role],
+              :class => 'btn btn-primary btn-sm'
+            - unless current_user.id == admin.id
+              = link_to 'Delete', [:admin, admin.role],
+                :method => :delete,
+                :data => {:confirm => 'Are you sure?'},
+                :class => 'btn btn-danger btn-sm'

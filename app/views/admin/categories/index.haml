@@ -1,17 +1,18 @@
-.page-header
-  .pull-left
-    %h1 Categories
-  .pull-right
-    = link_to '+ New', [:new, :admin, :category],
-      :class => 'btn btn-primary'
+.col-md-12
+  .page-header
+    .pull-left
+      %h1 Categories
+    .pull-right
+      = link_to '+ New', [:new, :admin, :category],
+        :class => 'btn btn-primary'
 
-  .clearfix
+    .clearfix
 
-%table.table.table-condensed.table-striped.table-hover
-  %thead
-    %tr
-      %th Name
-  %tbody
-    - @categories.each do |category|
+  %table.table.table-condensed.table-striped.table-hover
+    %thead
       %tr
-        %td= category
+        %th Name
+    %tbody
+      - @categories.each do |category|
+        %tr
+          %td= category

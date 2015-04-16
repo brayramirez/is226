@@ -1,54 +1,55 @@
-.page-header
-  .pull-left
-    %h1 Administrator
-  .pull-right
-    = link_to 'Edit', [:edit, :admin, @admin.role],
-      :class => 'btn btn-primary'
-    - unless current_user.id == @admin.id
-      = link_to 'Delete', [:admin, @admin.role],
-        :method => :delete,
-        :data => {:confirm => 'Are you sure?'},
-        :class => 'btn btn-danger'
-    = link_to 'Back', [:admin, :admins],
-      :class => 'btn btn-default'
+.col-md-12
+  .page-header
+    .pull-left
+      %h1 Administrator
+    .pull-right
+      = link_to 'Edit', [:edit, :admin, @admin.role],
+        :class => 'btn btn-primary'
+      - unless current_user.id == @admin.id
+        = link_to 'Delete', [:admin, @admin.role],
+          :method => :delete,
+          :data => {:confirm => 'Are you sure?'},
+          :class => 'btn btn-danger'
+      = link_to 'Back', [:admin, :admins],
+        :class => 'btn btn-default'
 
-  .clearfix
+    .clearfix
 
-- admin = @admin.decorate
-.col-md-8
-  %dl.dl-horizontal
-    %dt Name
-    %dd= admin
+  - admin = @admin.decorate
+  .col-md-8
+    %dl.dl-horizontal
+      %dt Name
+      %dd= admin
 
-    %dt Email
-    %dd= admin.email
+      %dt Email
+      %dd= admin.email
 
-    %dt Status
-    %dd= admin.status
+      %dt Status
+      %dd= admin.status
 
-.col-md-4
-  - unless @admin.confirmed?
-    = link_to 'Re-send confirmation email',
-      [:resend_confirmation, :admin, @admin.role],
-      :method => :put,
-      :class => 'btn btn-link'
+  .col-md-4
+    - unless @admin.confirmed?
+      = link_to 'Re-send confirmation email',
+        [:resend_confirmation, :admin, @admin.role],
+        :method => :put,
+        :class => 'btn btn-link'
 
-  - if @admin.id != current_user.id
-    = link_to 'Send reset password instructions',
-      [:reset_password, :admin, @admin.role],
-      :method => :put,
-      :class => 'btn btn-link'
+    - if @admin.id != current_user.id
+      = link_to 'Send reset password instructions',
+        [:reset_password, :admin, @admin.role],
+        :method => :put,
+        :class => 'btn btn-link'
 
-    = form_for @admin, :as => :user,
-      :url => [:enable, :admin, @admin.role],
-      :method => :put do |f|
+      = form_for @admin, :as => :user,
+        :url => [:enable, :admin, @admin.role],
+        :method => :put do |f|
 
-      - submit_text = 'Enable'
-      - value = false
+        - submit_text = 'Enable'
+        - value = false
 
-      - if @admin.active?
-        - submit_text = 'Disable'
-        - value = true
+        - if @admin.active?
+          - submit_text = 'Disable'
+          - value = true
 
-      = f.hidden_field :disabled, :value => value
-      = f.submit "#{submit_text} Account", :class => 'btn btn-link'
+        = f.hidden_field :disabled, :value => value
+        = f.submit "#{submit_text} Account", :class => 'btn btn-link'

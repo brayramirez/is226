@@ -1,56 +1,57 @@
-.page-header
-  %h1 Edit My Account
+.col-md-12
+  .page-header
+    %h1 Edit My Account
 
-= form_for @form, :url => [:buyer, :my_account],
-  :html => {:class => 'form-horizontal'} do |f|
+  = form_for @form, :url => [:buyer, :my_account],
+    :html => {:class => 'form-horizontal'} do |f|
 
-  .form-group
-    = f.label :email, :class => 'col-sm-2 control-label'
-    .col-sm-5
-      = f.text_field :email, :class => 'form-control', :readonly => true
+    .form-group
+      = f.label :email, :class => 'col-sm-2 control-label'
+      .col-sm-5
+        = f.text_field :email, :class => 'form-control', :readonly => true
 
-  .form-group
-    = f.label :first_name, :class => 'col-sm-2 control-label'
-    .col-sm-5
-      = f.text_field :first_name, :class => 'form-control'
+    .form-group
+      = f.label :first_name, :class => 'col-sm-2 control-label'
+      .col-sm-5
+        = f.text_field :first_name, :class => 'form-control'
 
-  .form-group
-    = f.label :last_name, :class => 'col-sm-2 control-label'
-    .col-sm-5
-      = f.text_field :last_name, :class => 'form-control'
+    .form-group
+      = f.label :last_name, :class => 'col-sm-2 control-label'
+      .col-sm-5
+        = f.text_field :last_name, :class => 'form-control'
 
-  .form-group
-    = f.label :buyer_type, 'Type', :class => 'col-sm-2 control-label'
-    .radio.radio-inline
-      %label
-        = f.radio_button :buyer_type, :business,
-          :checked => :business == @form.buyer_type.to_sym
-        Business
+    .form-group
+      = f.label :buyer_type, 'Type', :class => 'col-sm-2 control-label'
+      .radio.radio-inline
+        %label
+          = f.radio_button :buyer_type, :business,
+            :checked => :business == @form.buyer_type.to_sym
+          Business
 
-    .radio.radio-inline
-      %label
-        = f.radio_button :buyer_type, :individual,
-          :checked => :individual == @form.buyer_type.to_sym
-        Individual
+      .radio.radio-inline
+        %label
+          = f.radio_button :buyer_type, :individual,
+            :checked => :individual == @form.buyer_type.to_sym
+          Individual
 
-  .form-group
-    = f.label :company_name, :class => 'col-sm-2 control-label'
-    .col-sm-8
-      = f.text_field :company_name, :class => 'form-control'
+    .form-group
+      = f.label :company_name, :class => 'col-sm-2 control-label'
+      .col-sm-8
+        = f.text_field :company_name, :class => 'form-control'
 
-  .form-group
-    = f.label :contact_person, :class => 'col-sm-2 control-label'
-    .col-sm-8
-      = f.text_field :contact_person, :class => 'form-control'
+    .form-group
+      = f.label :contact_person, :class => 'col-sm-2 control-label'
+      .col-sm-8
+        = f.text_field :contact_person, :class => 'form-control'
 
-  .form-group
-    = f.label :contact_number, :class => 'col-sm-2 control-label'
-    .col-sm-8
-      = f.text_field :contact_number, :class => 'form-control'
+    .form-group
+      = f.label :contact_number, :class => 'col-sm-2 control-label'
+      .col-sm-8
+        = f.text_field :contact_number, :class => 'form-control'
 
-  %hr
+    %hr
 
-  .form-group
-    .col-sm-offset-2.col-sm-5
-      = f.submit 'Save', :class => 'btn btn-primary'
-      = link_to 'Cancel', [:buyer, :my_account], :class => 'btn btn-default'
+    .form-group
+      .col-sm-offset-2.col-sm-5
+        = f.submit 'Save', :class => 'btn btn-primary'
+        = link_to 'Cancel', [:buyer, :my_account], :class => 'btn btn-default'

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       member do
         put 'enable'
         put 'reset_password'
+        put 'resend_confirmation'
       end
     end
 
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
       member do
         put 'enable'
         put 'reset_password'
+        put 'resend_confirmation'
       end
     end
 

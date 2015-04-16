@@ -1,24 +1,25 @@
-.page-header
-  .pull-left
-    %h1 My Account
-  .pull-right
-    = link_to 'Edit', [:edit, :admin, :my_account],
-      :class => 'btn btn-primary'
+.col-md-12
+  .page-header
+    .pull-left
+      %h1 My Account
+    .pull-right
+      = link_to 'Edit', [:edit, :admin, :my_account],
+        :class => 'btn btn-primary'
 
-  .clearfix
+    .clearfix
 
-- account = current_user.decorate
-.col-md-8
-  %dl.dl-horizontal
-    %dt Name
-    %dd= account
+  - account = current_user.decorate
+  .col-md-8
+    %dl.dl-horizontal
+      %dt Name
+      %dd= account
 
-    %dt Email
-    %dd= account.email
+      %dt Email
+      %dd= account.email
 
-    %dt Status
-    %dd= account.status
+      %dt Status
+      %dd= account.status
 
-.col-md-4
-  = link_to 'Change Password', [:edit, :admin, :password],
-    :class => 'btn btn-link'
+  .col-md-4
+    = link_to 'Change Password', [:edit, :admin, :password],
+      :class => 'btn btn-link'
