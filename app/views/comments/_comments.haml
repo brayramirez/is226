@@ -10,7 +10,7 @@
       .comment
         .well.well-sm
           %blockquote
-            %p= comment.content
+            %p= raw comment.content
             %footer
               %p= comment.commenter current_user
               %small= comment.created_at

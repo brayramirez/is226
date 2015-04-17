@@ -33,7 +33,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 gem 'bootstrap-sass', '~> 3.3.3'
 
-gem 'bootstrap-datepicker-rails', '~> 1.4.0'
+# gem 'bootstrap-datepicker-rails', '~> 1.4.0'
+gem 'ckeditor', '~> 4.1.1'
 
 gem 'chosen-rails', '~> 1.4.1'
 

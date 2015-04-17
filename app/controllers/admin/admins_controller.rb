@@ -52,6 +52,7 @@ module Admin
 
 
     def destroy
+      @admin = User.find params[:id]
       @admin.destroy
       flash[:notice] = 'Administrator Account successfully deleted.'
 
