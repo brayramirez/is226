@@ -23,6 +23,7 @@ module Bidder
       if @bid.save
         redirect_to [:bidder, @order]
       else
+        flash[:error] = @bid.errors.full_messages
         render :new
       end
     end
@@ -37,6 +38,7 @@ module Bidder
       if @bid.update_attributes bid_params
         redirect_to [:bidder, @bid.order]
       else
+        flash[:error] = @bid.errors.full_messages
         render :edit
       end
     end

@@ -1,8 +1,9 @@
-.page-header
-  %h1 Edit Bid
+.col-md-12
+  .page-header
+    %h1 Edit Bid
 
-= form_for [:bidder, @bid],
-  :html => {:class => 'form-horizontal'} do |f|
+  = form_for [:bidder, @bid],
+    :html => {:class => 'form-horizontal'} do |f|
 
-  = render :partial => 'bidder/bids/partials/form',
-    :locals => {:f => f, :order => @bid.order}
+    = render :partial => 'bidder/bids/partials/form',
+      :locals => {:f => f, :order => @bid.order}

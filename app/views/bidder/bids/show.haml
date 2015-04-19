@@ -27,7 +27,7 @@
       .clearfix
 
     .panel-body
-      = @bid
+      = raw @bid
 
 = render :partial => 'comments/comment_panel',
   :locals => {:bid => @bid,

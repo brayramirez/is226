@@ -26,6 +26,9 @@ class Bid < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
 
 
+  validates :content, :presence => true
+
+
   def self.open_status
     Bid.statuses[:open]
   end
