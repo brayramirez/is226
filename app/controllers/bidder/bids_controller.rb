@@ -21,6 +21,7 @@ module Bidder
       @bid.assign_attributes bid_params
 
       if @bid.save
+        flash[:success] = 'You have successfuly made a bid.'
         redirect_to [:bidder, @order]
       else
         flash[:error] = @bid.errors.full_messages
@@ -30,12 +31,13 @@ module Bidder
 
 
     def edit
-      restrict_order @bid.order
+      restrict_bid
     end
 
 
     def update
       if @bid.update_attributes bid_params
+        flash[:success] = 'You have successfuly updated your bid.'
         redirect_to [:bidder, @bid.order]
       else
         flash[:error] = @bid.errors.full_messages
@@ -88,11 +90,11 @@ module Bidder
     end
 
 
-    def restrict_order order
-      return if order.editable?
+    def restrict_bid
+      return if @bid.editable?
 
-      flash[:error] = "Order is already #{order.decorate.simple_status} and no bids can be made."
-      redirect_to [:bidder, order]
+      flash[:error] = "Order is already #{@bid.order.decorate.simple_status} and no bids can be made."
+      redirect_to [:bidder, @bid.order]
     end
 
   end

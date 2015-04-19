@@ -7,7 +7,7 @@
       .pull-right
         = link_to 'Back', [:bidder, @bid.order],
           :class => 'btn btn-default btn-xs'
-        - if @bid.order.editable?
+        - if @bid.editable?
           - if @bid.open?
             = link_to 'Edit',
               [:edit, :bidder, @bid],

@@ -69,4 +69,9 @@ class Bid < ActiveRecord::Base
   end
   alias_method :bidder, :user
 
+
+  def editable?
+    self.order.open?
+  end
+
 end

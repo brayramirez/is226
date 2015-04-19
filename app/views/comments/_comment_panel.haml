@@ -9,7 +9,7 @@
   .panel{:class => panel_class}
     .panel-heading Comments
     .panel-body
-      - if !bid.order.closed? && bid.open?
+      - if bid.editable? && bid.open?
         = render :partial => 'comments/form',
           :locals => {:bid => bid, :account => account}
 

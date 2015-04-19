@@ -18,7 +18,7 @@
           = link_to 'View',
             [:bidder, bid],
             :class => 'btn btn-info btn-xs'
-          - if order.editable?
+          - if bid.editable?
             - if bid.open?
               = link_to 'Edit',
                 [:edit, :bidder, bid],
