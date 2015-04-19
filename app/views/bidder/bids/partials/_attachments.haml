@@ -1,0 +1,12 @@
+-#
+-# locals:
+-#   bid
+-#   panel_class
+-#
+
+.col-md-12
+  .panel{:class => panel_class}
+    .panel-heading Attachments
+    .panel-body
+      = render :partial => 'attachments/form',
+        :locals => {:owner => bid, :account => :bidder}

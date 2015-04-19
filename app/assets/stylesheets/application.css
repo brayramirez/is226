@@ -12,6 +12,8 @@
  *
  *= require global
  *= require chosen
+ *= require jquery.fileupload
+ *= require jquery.fileupload-ui
  *= require_tree ./public
  *= require_self
  */

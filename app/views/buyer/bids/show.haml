@@ -9,6 +9,9 @@
   :locals => {:bidder => @bid.bidder,
     :panel_class => panel_class}
 
+= render :partial => 'buyer/bids/partials/attachments',
+  :locals => {:bid => @bid, :panel_class => panel_class}
+
 = render :partial => 'comments/comment_panel',
   :locals => {:bid => @bid,
     :panel_class => panel_class,

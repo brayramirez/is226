@@ -1,0 +1,28 @@
+-#
+-# locals:
+-#   owner
+-#   account
+-#
+
+- if owner.open?
+  = form_for [account, owner, owner.attachments.new],
+    :method => :post,
+    :html => {:multipart => true, :class => 'js-fileupload'} do |f|
+
+    .row.fileupload-buttonbar
+      .col-md-3
+        %span.btn.btn-success.fileinput-button{:data => {:owner_id => owner.id}}
+          %i.glyphicon.glyphicon-plus
+          %span Add files
+          = file_field_tag 'fileupload'
+      .col-md-9
+        .progress.progress-success.progress-striped.active.fade
+          .bar{:style => 'width:0%'}
+
+      .col-md-12
+        .fileupload-loading
+
+= render :partial => 'attachments/list',
+  :locals => {:owner => owner,
+    :account => account,
+    :show_delete => owner.open?}

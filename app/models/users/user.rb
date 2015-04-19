@@ -44,10 +44,6 @@ class User < ActiveRecord::Base
 
   belongs_to :role, :polymorphic => true
 
-  # has_many :orders, :dependent => :destroy
-  # has_many :bids,
-  #   :foreign_key => :bidder_id,
-  #   :dependent => :destroy
   has_many :comments,
     :foreign_key => :commenter_id,
     :dependent => :destroy

@@ -67,6 +67,8 @@ Rails.application.routes.draw do
     resources :orders,
       :only => [:index, :show, :new, :create, :edit, :update] do
 
+      resources :attachments, :only => [:create]
+
       member do
         put 'close'
       end
@@ -79,6 +81,8 @@ Rails.application.routes.draw do
         put 'award'
       end
     end
+
+    resources :attachments, :only => [:show, :destroy]
 
     root 'dashboard#index'
   end
@@ -94,12 +98,15 @@ Rails.application.routes.draw do
 
     resources :bids, :only => [:show, :edit, :update] do
       resources :comments, :only => [:create]
+      resources :attachments, :only => [:create]
 
       member do
         put 'withdraw'
         put 'reopen'
       end
     end
+
+    resources :attachments, :only => [:show, :destroy]
 
     root 'dashboard#index'
   end

@@ -1,0 +1,34 @@
+-#
+-# locals:
+-#   bid
+-#   panel_class
+-#
+
+.col-md-12
+  .panel{:class => panel_class}
+    .panel-heading
+      .pull-left Your Bid
+      .pull-right
+        = link_to 'Back', [:bidder, bid.order],
+          :class => 'btn btn-default btn-xs'
+        - if bid.editable?
+          - if bid.open?
+            = link_to 'Edit',
+              [:edit, :bidder, bid],
+              :class => 'btn btn-default btn-xs'
+            = link_to 'Withdraw',
+              [:withdraw, :bidder, bid],
+              :class => 'btn btn-danger btn-xs',
+              :method => :put,
+              :data => {:confirm => "Are you sure you want to withdraw your bid?"}
+          - elsif bid.withdrawed?
+            = link_to 'Re-open',
+              [:reopen, :bidder, bid],
+              :class => 'btn btn-success btn-xs',
+              :method => :put,
+              :data => {:confirm => "Are you sure you want to withdraw your bid?"}
+
+      .clearfix
+
+    .panel-body
+      = raw bid

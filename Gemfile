@@ -52,6 +52,10 @@ gem 'reform', '~> 1.2.6'
 
 gem 'faker', '~> 1.4.3'
 
+gem 'paperclip', '~> 4.2.1'
+
+gem 'jquery-fileupload-rails', '~> 0.4.5'
+
 
 group :development do
   gem 'thin', '~> 1.6.3'

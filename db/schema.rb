@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413060002) do
+ActiveRecord::Schema.define(version: 20150419082342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 20150413060002) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "attachments", ["owner_type", "owner_id"], name: "index_attachments_on_owner_type_and_owner_id", using: :btree
 
   create_table "bidder_account_categories", force: :cascade do |t|
     t.integer "bidder_account_id"

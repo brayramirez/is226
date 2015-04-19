@@ -6,5 +6,8 @@
 = render :partial => 'bidder/orders/partials/client_details',
   :locals => {:order => order, :client => order.user.decorate}
 
+= render :partial => 'bidder/orders/partials/attachments',
+  :locals => {:order => order}
+
 = render :partial => 'bidder/orders/partials/bid',
   :locals => {:order => order}

@@ -31,6 +31,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :buyer_account
 
+  has_many :attachments, :as => :owner, :dependent => :destroy
   has_many :bids, :dependent => :destroy
   has_one :awarded_bid,
     -> { where :status => Bid.statuses[:awarded] },

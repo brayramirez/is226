@@ -23,6 +23,8 @@ class Bid < ActiveRecord::Base
 
   belongs_to :order
   belongs_to :bidder_account
+
+  has_many :attachments, :as => :owner, :dependent => :destroy
   has_many :comments, :dependent => :destroy
 
 
