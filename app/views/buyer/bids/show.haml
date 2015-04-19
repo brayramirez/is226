@@ -1,22 +1,13 @@
 - panel_class = @bid.decorate.panel_class
 
-.col-md-12
-  .panel{:class => panel_class}
-    .panel-heading
-      .pull-left Bid by #{@bid.bidder}
-      .pull-right
-        - if !@bid.order.closed? && @bid.open?
-          = link_to 'Award Order', [:award, :buyer, @bid],
-            :class => 'btn btn-success btn-xs',
-            :method => :put,
-            :data => {:confirm => "Are you sure you want to award this Order to #{@bid.bidder}?"}
-        = link_to 'Back', [:buyer, @bid.order],
-          :class => 'btn btn-default btn-xs'
+= render :partial => 'buyer/bids/partials/bid',
+  :locals => {:bidder => @bid.bidder,
+    :bid => @bid,
+    :panel_class => panel_class}
 
-      .clearfix
-
-    .panel-body
-      = @bid
+= render :partial => 'buyer/bids/partials/bidder',
+  :locals => {:bidder => @bid.bidder,
+    :panel_class => panel_class}
 
 = render :partial => 'comments/comment_panel',
   :locals => {:bid => @bid,
