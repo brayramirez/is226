@@ -23,8 +23,9 @@ class Order < ActiveRecord::Base
   enum :status => [:open, :awarded, :closed] unless instance_methods.include? :status
 
   scope :by_latest, -> { order('orders.created_at DESC') }
-  scope :recent_week, -> { by_latest.where 'DATE(orders.created_at) >= ?', 7.days.ago.to_date }
+  scope :recent_week, -> { where 'DATE(orders.created_at) >= ?', 7.days.ago.to_date }
   scope :open, -> { where :status => self.open_status }
+  scope :closed, -> { where :status => self.closed_status }
   scope :awarded, -> { where :status => self.awarded_status }
 
 
@@ -55,6 +56,23 @@ class Order < ActiveRecord::Base
 
   def self.under_category ids
     joins(:categories).where('categories.id IN (?)', ids).uniq
+  end
+
+
+  def self.by_status status = nil
+    orders = Order.by_latest
+    return orders if status.nil?
+
+    orders =
+      if status == :open
+        orders.open
+      elsif status == :closed
+        orders.closed
+      elsif status == :awarded
+        orders.awarded
+      end
+
+    orders
   end
 
 

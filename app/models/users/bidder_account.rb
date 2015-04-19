@@ -24,23 +24,26 @@ class BidderAccount < ActiveRecord::Base
   end
 
 
-  def orders
-    Order.where(:id => self.bids.pluck(:order_id))
+  def orders_with_bid status = nil
+    orders = Order.where(:id => self.bids.pluck(:order_id)).by_latest
+    return orders if status.nil?
+
+    return orders.awarded if status == :awarded
+
+    orders.open
   end
 
 
-  def open_orders
+  def categorized
     Order.open.by_latest.under_category self.category_ids
   end
 
 
-  def open_orders_with_bids
-    self.orders.open.by_latest
-  end
+  def orders status = nil
+    return self.categorized if status.nil?
+    return Order.open.by_latest if status == :all
 
-
-  def awarded_orders
-    self.orders.awarded.by_latest
+    self.orders_with_bid status
   end
 
 end

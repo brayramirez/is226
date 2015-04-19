@@ -7,7 +7,8 @@ module Buyer
 
 
     def index
-      @orders = current_role.orders.by_latest
+      @state = params[:state].present? ? params[:state].to_sym : nil
+      @orders = current_role.orders.by_status @state
     end
 
 

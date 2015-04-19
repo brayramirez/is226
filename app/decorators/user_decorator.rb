@@ -14,7 +14,7 @@ class UserDecorator < ApplicationDecorator
 
 
   def categories
-    source.role.categories.alphabetical.pluck(:name).join(', ')
+    source.role.decorate.categories
   end
 
 end

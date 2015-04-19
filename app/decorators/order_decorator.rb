@@ -13,9 +13,9 @@ class OrderDecorator < ApplicationDecorator
   end
 
 
-  def status
+  def status options = {:show_awardee => false}
     display = STATUS[Order.statuses[source.status]]
-    return display unless source.awarded?
+    return display if !source.awarded? || !options[:show_awardee]
 
     "#{display} to #{order.awarded_bid.bidder}"
   end

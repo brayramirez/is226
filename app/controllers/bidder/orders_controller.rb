@@ -2,7 +2,8 @@ module Bidder
   class OrdersController < Bidder::BaseController
 
     def index
-      @orders = current_role.open_orders
+      @state = params[:state].present? ? params[:state].to_sym : nil
+      @orders = current_role.orders @state
     end
 
 

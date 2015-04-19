@@ -6,10 +6,14 @@
 -#
 
 - show_status = local_assigns[:show_status] || false
+- show_awarded = local_assigns[:show_awarded] || false
 
 %tr
   %td= link_to order, [account, order]
+  - if show_awarded
+    %td= order.awardee
   - if show_status
-    %td= order.status
+    %td= order.status :show_awardee => account == :buyer
+  %td= order.categories
   %td= order.created_at
   %td= order.bids.count
