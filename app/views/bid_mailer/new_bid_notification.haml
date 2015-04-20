@@ -5,7 +5,15 @@
 %p A bid has been made for order with item #{@order.item}.
 %p Details are as follows:
 
-%p= raw @bid.content
+%dl.dl-horizontal
+  %dt Bidder
+  %dd= @bid.bidder.name
+
+  %dt Company
+  %dd= @bid.bidder.company_name
+
+  %dt Bid
+  %dd= raw @bid.content
 
 %br
 

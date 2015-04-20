@@ -11,7 +11,6 @@ module Bidder
 
 
     def show
-      restrict_order
     end
 
 
@@ -22,14 +21,6 @@ module Bidder
 
     def init_order
       @order = Order.find params[:id]
-    end
-
-
-    def restrict_order
-      return if !@order.closed?
-
-      flash[:error] = "Order is already closed."
-      redirect_to [:bidder, :orders]
     end
 
   end

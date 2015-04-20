@@ -47,7 +47,7 @@ class OrderForm < Reform::Form
 
 
   def notify_bidders
-    bidders = BidderAccount.under_category self.category_ids
+    bidders = BidderAccount.under_category self.model.category_ids
 
     bidders.each do |bidder|
       OrderMailer.new_order_notification(bidder.user, self.model).deliver_now

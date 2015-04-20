@@ -30,10 +30,10 @@ class BidderAccount < ActiveRecord::Base
 
 
   def orders_with_bid status = nil
+    return self.awarded_orders if status == :awarded
+
     orders = Order.where(:id => self.bids.pluck(:order_id)).by_latest
     return orders if status.nil?
-
-    return orders.awarded if status == :awarded
 
     orders.open
   end
@@ -49,6 +49,13 @@ class BidderAccount < ActiveRecord::Base
     return Order.open.by_latest if status == :all
 
     self.orders_with_bid status
+  end
+
+
+  def awarded_orders
+    ids = self.bids.where(:status => Bid.awarded_status).pluck :order_id
+
+    Order.where(:id => ids)
   end
 
 end

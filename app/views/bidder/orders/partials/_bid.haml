@@ -42,7 +42,7 @@
         = raw bid
       - else
         %h4 You don't have a bid for this order.
-        - if order.editable?
+        - if order.open?
           %hr
 
           = link_to 'Make a Bid', [:new, :bidder, order, :bid],
