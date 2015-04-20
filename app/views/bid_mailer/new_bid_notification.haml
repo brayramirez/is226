@@ -1,0 +1,14 @@
+%p Hi #{@recipient.name}!
+
+%br
+
+%p A bid has been made for order with item #{@order.item}.
+%p Details are as follows:
+
+%p= raw @bid.content
+
+%br
+
+%p
+  Visit bid
+  = link_to 'here', [:buyer, @bid]

@@ -10,18 +10,19 @@ module CommentControllerHelper
 
       before_filter :init_bid, :only => [:create]
       before_filter :init_comment, :only => [:create]
+      before_filter :init_form, :only => [:create]
     end
   end
 
 
   def create
-    @comment.assign_attributes comment_params
+    if @form.validate params[:comment]
+      @form.save
 
-    if @comment.save
       render :partial => 'comments/comment',
-        :locals => {:comment => @comment.decorate, :commenter => current_user}
+        :locals => {:comment => @form.model.decorate, :commenter => current_user}
     else
-      render :json => {:error => @comment.errors.full_messages},
+      render :json => {:error => @form.model.errors.full_messages},
         :status => :bad_request
     end
   end
@@ -42,8 +43,8 @@ module CommentControllerHelper
   end
 
 
-  def comment_params
-    params.require(:comment).permit(:content)
+  def init_form
+    @form = CommentForm.new @comment
   end
 
 end

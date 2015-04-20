@@ -1,0 +1,21 @@
+%p Hi #{@recipient.name}!
+
+%br
+
+%p A new order has been requested. Details are as follows:
+
+%dl.dl-horizontal
+  %dt Item
+  %dd= @order.item
+
+  %dt Quantity
+  %dd= @order.quantity
+
+  %dt Details
+  %dd= raw @order.details
+
+%br
+
+%p
+  Visit Order
+  = link_to 'here', [:bidder, @order]

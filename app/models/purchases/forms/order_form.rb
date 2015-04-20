@@ -29,7 +29,11 @@ class OrderForm < Reform::Form
 
 
   def save
+    new_record = self.model.new_record?
+
     super
+
+    self.notify_bidders if new_record
   end
 
 
@@ -39,6 +43,15 @@ class OrderForm < Reform::Form
 
   def presence_of_categories
     errors.add(:categories, 'is required') if self.category_ids.blank?
+  end
+
+
+  def notify_bidders
+    bidders = BidderAccount.under_category self.category_ids
+
+    bidders.each do |bidder|
+      OrderMailer.new_order_notification(bidder.user, self.model).deliver_now
+    end
   end
 
 end

@@ -1,0 +1,11 @@
+%p Hi #{@recipient.name}!
+
+%br
+
+%p #{@bid.bidder} withdrew from the bidding process.
+
+%br
+
+%p
+  Visit bid
+  = link_to 'here', [:buyer, @bid]

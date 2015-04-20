@@ -55,7 +55,7 @@ module Buyer
 
 
     def close
-      @order.close!
+      OrderClosingSupport.new(@order).close!
 
       flash[:notice] = 'Order closed.'
       redirect_to [:buyer, @order]

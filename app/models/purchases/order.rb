@@ -130,5 +130,6 @@ class Order < ActiveRecord::Base
   def user
     self.buyer_account.user
   end
+  alias_method :buyer, :user
 
 end

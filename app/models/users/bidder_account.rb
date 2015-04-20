@@ -24,6 +24,11 @@ class BidderAccount < ActiveRecord::Base
   end
 
 
+  def self.under_category ids
+    joins(:categories).where('categories.id IN (?)', ids).uniq
+  end
+
+
   def orders_with_bid status = nil
     orders = Order.where(:id => self.bids.pluck(:order_id)).by_latest
     return orders if status.nil?

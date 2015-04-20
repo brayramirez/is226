@@ -1,10 +1,12 @@
 -#
 -# locals:
+-#   form
 -#   account
 -#   bid
 -#
 
-= form_for [account, bid, bid.comments.new],
+- comment = bid.comments.new
+= form_for CommentForm.new(comment), :url => [account, bid, comment],
   :html => {:class => 'form-horizontal js-comment-form'} do |f|
 
   .form-group
