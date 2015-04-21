@@ -13,11 +13,14 @@ class OrderDecorator < ApplicationDecorator
   end
 
 
-  def status options = {:show_awardee => false}
-    display = STATUS[Order.statuses[source.status]]
-    return display if !source.awarded? || !options[:show_awardee]
+  def status user = nil
+    raise 'User is required.' if user.blank?
 
-    "#{display} to #{order.awarded_bid.bidder}"
+    display = STATUS[Order.statuses[source.status]]
+    return display if !source.awarded?
+    return "#{display} to #{order.awarded_bid.bidder}" if user.buyer?
+
+    order.awarded_bid.bidder == user ? "#{display} to you" : display
   end
 
 

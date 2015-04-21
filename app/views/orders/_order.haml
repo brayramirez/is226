@@ -13,7 +13,7 @@
   - if show_awarded
     %td= order.awardee
   - if show_status
-    %td= order.status :show_awardee => account == :buyer
+    %td= order.status current_user
   %td= order.categories
   %td= order.created_at
   %td= order.bids.count
