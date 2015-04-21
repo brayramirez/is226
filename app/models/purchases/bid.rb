@@ -21,6 +21,9 @@ class Bid < ActiveRecord::Base
   enum :status => [:open, :awarded, :withdrawed] unless instance_methods.include? :status
 
 
+  scope :recent_week, -> { where 'DATE(bids.created_at) >= ?', 7.days.ago.to_date }
+
+
   belongs_to :order
   belongs_to :bidder_account
 

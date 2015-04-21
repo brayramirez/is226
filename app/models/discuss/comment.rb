@@ -21,6 +21,12 @@ class Comment < ActiveRecord::Base
   belongs_to :commenter, :class_name => 'User'
 
 
-  scope :recent, -> { order('created_at DESC') }
+  scope :by_latest, -> { order('created_at DESC') }
+  scope :recent_week, -> { where('DATE(comments.created_at) >= ?', 7.days.ago.to_date) }
+
+
+  def order
+    self.bid.order
+  end
 
 end

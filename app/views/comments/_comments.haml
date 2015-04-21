@@ -5,7 +5,7 @@
 
 .js-comments-container
   - if comments.any?
-    - comments.recent.each do |comment|
+    - comments.by_latest.each do |comment|
       - comment = comment.decorate
       .comment
         .well.well-sm
