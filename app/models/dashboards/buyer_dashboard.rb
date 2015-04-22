@@ -1,4 +1,4 @@
-class BuyerDashboardSupport
+class BuyerDashboard
 
   attr_accessor :buyer, :user, :actions
 

@@ -4,7 +4,9 @@
 -#   account
 -#
 
-- if owner.open?
+- displayable = owner.is_a?(Bid) ? owner.open? && owner.order.open? : owner.open?
+
+- if displayable
   = form_for [account, owner, owner.attachments.new],
     :method => :post,
     :html => {:multipart => true, :class => 'js-fileupload'} do |f|

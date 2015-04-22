@@ -4,7 +4,7 @@ module Buyer
     def index
       @orders = current_role.orders.open.by_latest.recent_week
       @awarded_orders = current_role.orders.awarded.by_latest.recent_week
-      @activities = BuyerDashboardSupport.new(current_role).recent_activities
+      @activities = BuyerDashboard.new(current_role).recent_activities
     end
 
   end

@@ -6,8 +6,5 @@
     :locals => {:orders => @awarded_orders.decorate}
 
 .col-md-6
-  .panel.panel-primary
-    .panel-heading Activities for the last 7 Days
-    %ul.list-group
-      = list_of @activities, :class => 'list-group-item' do |activity|
-        = raw activity
+  = render :partial => 'buyer/dashboard/partials/activities',
+    :locals => {:activities => @activities}
