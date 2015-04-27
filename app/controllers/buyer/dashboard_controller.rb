@@ -1,10 +1,12 @@
 module Buyer
   class DashboardController < Buyer::BaseController
 
+    include DashboardControllerHelper
+
+
     def index
       @orders = current_role.orders.open.by_latest.recent_week
       @awarded_orders = current_role.orders.awarded.by_latest.recent_week
-      @activities = BuyerDashboard.new(current_role).recent_activities
     end
 
   end

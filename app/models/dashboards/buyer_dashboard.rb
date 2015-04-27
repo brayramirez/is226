@@ -13,7 +13,7 @@ class BuyerDashboard
 
 
   def recent_activities
-    extract_activities
+    self.extract_activities
 
     self.actions
   end
