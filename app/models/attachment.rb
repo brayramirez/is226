@@ -19,8 +19,7 @@
 
 class Attachment < ActiveRecord::Base
 
-  ALLOWED_CONTENT_TYPES = ['image/jpeg', 'image/png', 'application/pdf',
-                            'application/doc', 'application/docx']
+  ALLOWED_CONTENT_TYPE = /^(((image)|(application))\/.+)|(text\/plain)$/
 
 
   scope :by_latest, -> { order('attachments.created_at DESC') }
@@ -34,7 +33,8 @@ class Attachment < ActiveRecord::Base
 
 
   validates_attachment :file,
-    :content_type => {:content_type => ALLOWED_CONTENT_TYPES}
+    :content_type => {:content_type => ALLOWED_CONTENT_TYPE},
+    :size => {:in => 0..1.megabytes}
 
 
   #

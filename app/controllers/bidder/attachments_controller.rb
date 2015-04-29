@@ -4,17 +4,21 @@ module Bidder
     include AttachmentControllerHelper
 
 
-    before_action :init_bid, :only => [:create]
+    # before_action :init_bid, :only => [:create]
 
 
-    def create
-      @attachment = @bid.attachments.new :file => params[:fileupload]
+    # def create
+    #   @attachment = @bid.attachments.new :file => params[:fileupload]
 
-      @attachment.save
-      render :partial => 'attachments/attachment',
-        :locals => {:attachment => @attachment.decorate,
-          :account => account.to_s}
-    end
+    #   if @attachment.save
+    #     render :partial => 'attachments/attachment',
+    #       :locals => {:attachment => @attachment.decorate,
+    #         :account => account.to_s}
+    #   else
+    #     render :json => {:error => @attachment.errors.full_messages},
+    #       :status => :bad_request
+    #   end
+    # end
 
 
 
@@ -22,8 +26,8 @@ module Bidder
 
     private
 
-    def init_bid
-      @bid = Bid.find params[:bid_id]
+    def init_owner
+      @owner = Bid.find params[:bid_id]
     end
 
 

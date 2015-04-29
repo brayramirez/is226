@@ -18,8 +18,8 @@
           %span Add files
           = file_field_tag 'fileupload'
       .col-md-9
-        .progress.progress-success.progress-striped.active.fade
-          .bar{:style => 'width:0%'}
+        .js-progress.progress.hidden
+          .progress-bar.progress-bar-success.progress-bar-striped.active{:style => 'width:0%'}
 
       .col-md-12
         .fileupload-loading
