@@ -90,4 +90,11 @@ class User < ActiveRecord::Base
     !self.disabled?
   end
 
+
+  def password_required?
+    return false if self.role.is_a?(AdminAccount) && self.new_record?
+
+    super
+  end
+
 end

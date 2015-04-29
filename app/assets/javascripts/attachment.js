@@ -11,6 +11,7 @@ $(document).ready(function(){
                       'account': response.account,
                       'id': response.id,
                       'filename': response.filename,
+                      'url': response.url,
                       'created_at': response.created_at
                     }));
 

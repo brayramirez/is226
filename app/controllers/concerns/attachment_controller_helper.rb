@@ -14,8 +14,7 @@ module AttachmentControllerHelper
 
 
   def show
-    send_file File.join(Rails.root, 'public',
-      @attachment.file.url.split('?').first)
+    @attachment.file.url
   end
 
 

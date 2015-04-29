@@ -26,7 +26,8 @@ class Attachment < ActiveRecord::Base
   scope :by_latest, -> { order('attachments.created_at DESC') }
 
 
-  has_attached_file :file
+  has_attached_file :file,
+    :path => ':owner/:owner_id/:class/:id_partition/:filename'
 
 
   belongs_to :owner, :polymorphic => true
@@ -36,8 +37,40 @@ class Attachment < ActiveRecord::Base
     :content_type => {:content_type => ALLOWED_CONTENT_TYPES}
 
 
+  #
+  #
+  # Interpolators
+  #
+  #
+  Paperclip.interpolates :owner do |attachment, style|
+    attachment.instance.owner.class.name.downcase
+  end
+
+
+  Paperclip.interpolates :owner_id do |attachment, style|
+    attachment.instance.owner_id
+  end
+
+
+  Paperclip.interpolates :filename do |attachment, style|
+    [attachment.instance.base_name(attachment, style),
+      File.extname(attachment.original_filename)].join
+  end
+
+
   def to_s
     self.file_file_name
+  end
+
+
+  def base_name attachment, style = :original
+    filename =
+      attachment.original_filename.gsub(
+        /#{Regexp.escape(File.extname(attachment.original_filename))}\Z/, '')
+
+    return filename if style == :original
+
+    [filename, style].join '_'
   end
 
 end

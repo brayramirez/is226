@@ -54,6 +54,8 @@ gem 'faker', '~> 1.4.3'
 
 gem 'paperclip', '~> 4.2.1'
 
+gem 'aws-sdk', '< 2.0'
+
 gem 'jquery-fileupload-rails', '~> 0.4.5'
 
 
