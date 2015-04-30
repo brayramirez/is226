@@ -2,16 +2,26 @@
 -# locals:
 -#   orders
 -#   account
+-#   show_status
 -#
+
+- show_status = local_assigns[:show_status] || false
+- show_awarded = local_assigns[:show_awarded] || false
 
 %table.table.table-condensed.table-striped.table-hover
   %thead
     %tr
       %th Item
-      %th Status
+      - if show_status
+        %th Status
+      %th Category
       %th Created At
       %th # of Bids
+      - if show_awarded
+        %th Awarded To
   %tbody
     = render :partial => 'orders/order',
       :collection => orders,
-      :locals => {:account => account}
+      :locals => {:account => account,
+        :show_status => show_status,
+        :show_awarded => show_awarded}

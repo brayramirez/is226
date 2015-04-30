@@ -33,7 +33,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 gem 'bootstrap-sass', '~> 3.3.3'
 
-gem 'bootstrap-datepicker-rails', '~> 1.4.0'
+# gem 'bootstrap-datepicker-rails', '~> 1.4.0'
+gem 'ckeditor', '~> 4.1.1'
 
 gem 'chosen-rails', '~> 1.4.1'
 
@@ -50,6 +51,12 @@ gem 'seedbank', '~> 0.3.0'
 gem 'reform', '~> 1.2.6'
 
 gem 'faker', '~> 1.4.3'
+
+gem 'paperclip', '~> 4.2.1'
+
+gem 'aws-sdk', '< 2.0'
+
+gem 'jquery-fileupload-rails', '~> 0.4.5'
 
 
 group :development do

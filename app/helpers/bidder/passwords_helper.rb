@@ -1,2 +1,0 @@
-module Bidder::PasswordsHelper
-end

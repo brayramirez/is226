@@ -39,7 +39,7 @@
     .col-sm-8
       = f.select :categories,
         options_from_collection_for_select(Category.alphabetical,
-          'id', 'name', @form.category_ids),
+          'id', 'name', @form.categories),
         {:include_blank => true},
         :multiple => true,
         :class => 'js-chosen-select form-control',

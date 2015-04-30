@@ -1,12 +1,27 @@
-.page-header
-  .pull-left
+.col-md-12
+  .page-header
     %h1 Orders
-  .pull-right
-    = link_to '+ New', [:new, :buyer, :order],
-      :class => 'btn btn-primary'
 
-  .clearfix
+    .pull-left
+      .btn-group
+        - path = [:buyer, :orders]
+        = link_to 'All', path,
+          :class => "btn btn-primary #{'active' if @state.nil?}"
+        = link_to 'Open', polymorphic_path(path, :state => :open),
+          :class => "btn btn-primary #{'active' if @state == :open}"
+        = link_to 'Closed', polymorphic_path(path, :state => :closed),
+          :class => "btn btn-primary #{'active' if @state == :closed}"
+        = link_to 'Awarded', polymorphic_path(path, :state => :awarded),
+          :class => "btn btn-primary #{'active' if @state == :awarded}"
 
-= render :partial => 'orders/list',
-  :locals => {:orders => @orders.decorate,
-    :account => :buyer}
+    .pull-right
+      = link_to '+ New', [:new, :buyer, :order],
+        :class => 'btn btn-primary'
+
+    .clearfix
+
+  = render :partial => 'orders/list',
+    :locals => {:orders => @orders.decorate,
+      :account => :buyer,
+      :show_status => @state.nil?,
+      :show_awarded => @state == :awarded}

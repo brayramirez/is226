@@ -1,0 +1,11 @@
+%p Hi #{@recipient.name}!
+
+%br
+
+%p #{@bid.bidder} has reopened his bid.
+
+%br
+
+%p
+  Visit bid
+  = link_to 'here', [:buyer, @bid]

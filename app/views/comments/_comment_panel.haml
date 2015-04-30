@@ -1,0 +1,21 @@
+-#
+-# locals:
+-#   form
+-#   account
+-#   bid
+-#   panel_class
+-#
+
+.col-md-12
+  .panel{:class => panel_class}
+    .panel-heading Comments
+    .panel-body
+      - if bid.editable? && bid.open?
+        = render :partial => 'comments/form',
+          :locals => {:bid => bid, :account => account}
+
+        %hr
+
+      = render :partial => 'comments/comments',
+        :locals => {:comments => bid.comments}
+

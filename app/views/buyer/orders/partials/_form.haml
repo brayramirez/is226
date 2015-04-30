@@ -24,11 +24,8 @@
   .form-group
     = f.label :target, :class => 'col-sm-2 control-label'
     .col-sm-5
-      .input-group
-        = f.text_field :target, :class => 'form-control js-datepicker',
-          :readonly => disabled
-        %span.input-group-addon
-          %i.glyphicon.glyphicon-calendar
+      = f.date_field :target, :class => 'form-control',
+        :readonly => disabled
 
   .form-group
     = f.label :categories, :class => 'col-sm-2 control-label'
@@ -43,8 +40,8 @@
 
   .form-group
     = f.label :details, :class => 'col-sm-2 control-label'
-    .col-sm-5
-      = f.text_area :details, :class => 'form-control',
+    .col-sm-10
+      = f.cktext_area :details, :class => 'form-control',
         :readonly => disabled
 
   %hr

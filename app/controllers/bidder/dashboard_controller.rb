@@ -1,9 +1,13 @@
 module Bidder
   class DashboardController < Bidder::BaseController
 
+    include DashboardControllerHelper
+
+
     def index
-      @orders = Order.open.recent_week.under_category current_user.category_ids
-      @orders_with_bids = current_user.becomes(BidderAccount).orders_with_bids
+      @orders = current_role.categorized.recent_week
+      @orders_with_bids = current_role.orders_with_bid(:open).recent_week
+      @awarded_orders = current_role.orders_with_bid(:awarded).recent_week
     end
 
   end

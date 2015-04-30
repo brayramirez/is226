@@ -1,0 +1,24 @@
+-#
+-# locals:
+-#   bidder
+-#   bid
+-#   panel_class
+-#
+
+.col-md-8
+  .panel{:class => panel_class}
+    .panel-heading
+      .pull-left Bid by #{bidder}
+      .pull-right
+        - if !bid.order.closed? && bid.open?
+          = link_to 'Award Order', [:award, :buyer, bid],
+            :class => 'btn btn-success btn-xs',
+            :method => :put,
+            :data => {:confirm => "Are you sure you want to award this Order to #{bidder}?"}
+        = link_to 'Back', [:buyer, bid.order],
+          :class => 'btn btn-default btn-xs'
+
+      .clearfix
+
+    .panel-body
+      = raw bid

@@ -1,2 +1,0 @@
-module Bidder::BidsHelper
-end

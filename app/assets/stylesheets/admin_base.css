@@ -11,6 +11,5 @@
  * file per style scope.
  *
  *= require global
- *= require_tree ./admin
  *= require_self
  */

@@ -1,43 +1,10 @@
 - order = @order.decorate
 
-.col-md-12
-  .panel{:class => order.panel_class}
-    .panel-heading
-      .pull-left Order Detail: #{order}
-      .pull-right
-        = link_to 'Back', [:buyer, :orders],
-          :class => 'btn btn-default btn-xs'
-        - if order.editable?
-          = link_to 'Edit', [:edit, :buyer, order],
-            :class => 'btn btn-default btn-xs'
-        - if order.open?
-          = link_to 'Close Order', [:close, :buyer, order],
-            :class => 'btn btn-danger btn-xs',
-            :method => :put
+= render :partial => 'buyer/orders/partials/details',
+  :locals => {:order => order}
 
-      .clearfix
-    .panel-body
-      %dl.dl-horizontal
-        %dt Status
-        %dd= order.status
-
-        %dt Categories
-        %dd= order.categories
-
-        %dt Quantity
-        %dd= order.quantity
-
-        %dt Budget
-        %dd= order.budget
-
-        %dt Date Created
-        %dd= order.created_at
-
-        %dt Target Date
-        %dd= order.target
-
-        %dt Details
-        %dd= order.details
+= render :partial => 'buyer/orders/partials/attachments',
+  :locals => {:order => order, :show_delete => true}
 
 - if order.bids.any?
   = render :partial => 'buyer/orders/partials/bid',

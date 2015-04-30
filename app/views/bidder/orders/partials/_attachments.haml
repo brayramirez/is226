@@ -1,0 +1,11 @@
+-#
+-# locals:
+-#   order
+-#
+
+.col-md-12
+  .panel{:class => order.panel_class}
+    .panel-heading Attachments
+    .panel-body
+      = render :partial => 'attachments/list',
+        :locals => {:owner => order, :account => :bidder}

@@ -1,5 +1,6 @@
 class OrderDecorator < ApplicationDecorator
 
+  SIMPLE_STATUS = ['open', 'awarded', 'closed']
   STATUS = ['Open',
             'Awarded',
             'Closed (This order is no longer editable and no bidding can be made.)']
@@ -7,11 +8,19 @@ class OrderDecorator < ApplicationDecorator
   PANEL_CLASS = ['panel-primary', 'panel-success', 'panel-default']
 
 
-  def status
-    display = STATUS[Order.statuses[source.status]]
-    return display unless source.awarded?
+  def simple_status
+    SIMPLE_STATUS[Order.statuses[source.status]]
+  end
 
-    "#{display} to #{order.awarded_bid.bidder}"
+
+  def status user = nil
+    raise 'User is required.' if user.blank?
+
+    display = STATUS[Order.statuses[source.status]]
+    return display if !source.awarded?
+    return "#{display} to #{order.awarded_bid.bidder}" if user.buyer?
+
+    order.awarded_bid.bidder == user ? "#{display} to you" : display
   end
 
 

@@ -2,10 +2,18 @@
 -# locals:
 -#   order
 -#   account
+-#   show_status
 -#
+
+- show_status = local_assigns[:show_status] || false
+- show_awarded = local_assigns[:show_awarded] || false
 
 %tr
   %td= link_to order, [account, order]
-  %td= order.status
+  - if show_awarded
+    %td= order.awardee
+  - if show_status
+    %td= order.status current_user
+  %td= order.categories
   %td= order.created_at
   %td= order.bids.count

@@ -1,40 +1,18 @@
 - panel_class = @bid.decorate.panel_class
 
-.col-md-12
-  .panel{:class => panel_class}
-    .panel-heading
-      .pull-left Bid by #{@bid.bidder}
-      .pull-right
-        - if !@bid.order.closed? && @bid.open?
-          = link_to 'Award Order', [:award, :buyer, @bid],
-            :class => 'btn btn-success btn-xs',
-            :method => :put,
-            :data => {:confirm => "Are you sure you want to award this Order to #{@bid.bidder}?"}
-        = link_to 'Back', [:buyer, @bid.order],
-          :class => 'btn btn-default btn-xs'
+= render :partial => 'buyer/bids/partials/bid',
+  :locals => {:bidder => @bid.bidder,
+    :bid => @bid,
+    :panel_class => panel_class}
 
-      .clearfix
+= render :partial => 'buyer/bids/partials/bidder',
+  :locals => {:bidder => @bid.bidder,
+    :panel_class => panel_class}
 
-    .panel-body
-      = @bid
+= render :partial => 'buyer/bids/partials/attachments',
+  :locals => {:bid => @bid, :panel_class => panel_class}
 
-.col-md-12
-  .panel{:class => panel_class}
-    .panel-heading Comments
-    .panel-body
-      - if !@bid.order.closed? && @bid.open?
-        = render :partial => 'buyer/comments/new', :locals => {:bid => @bid}
-
-        %hr
-
-      .js-comments-container
-        - if @bid.comments.any?
-          - @bid.comments.recent.each do |comment|
-            .comment
-              .well.well-sm
-                %blockquote
-                  %p= comment.content
-                  %footer= comment.commenter
-        - else
-          .js-no-comments
-            %h4 No Comments for this bid yet.
+= render :partial => 'comments/comment_panel',
+  :locals => {:bid => @bid,
+    :panel_class => panel_class,
+    :account => :buyer}

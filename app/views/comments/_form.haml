@@ -1,0 +1,20 @@
+-#
+-# locals:
+-#   form
+-#   account
+-#   bid
+-#
+
+- comment = bid.comments.new
+= form_for CommentForm.new(comment), :url => [account, bid, comment],
+  :html => {:class => 'form-horizontal js-comment-form'} do |f|
+
+  .form-group
+    .col-sm-12
+      = f.cktext_area :content,
+        :class => 'form-control'
+
+  .form-group
+    .col-sm-6
+      = link_to 'Post Comment', '#',
+        :class => 'js-submit-comment btn btn-primary'

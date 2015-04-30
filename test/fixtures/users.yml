@@ -21,17 +21,18 @@
 #  updated_at             :datetime
 #  first_name             :string           not null
 #  last_name              :string           not null
-#  account_type           :integer          default(0), not null
 #  company_name           :string
 #  contact_person         :string
 #  contact_number         :string
-#  buyer_type             :integer          default(0), not null
 #  disabled               :boolean          default(FALSE)
+#  role_id                :integer
+#  role_type              :string
 #
 # Indexes
 #
-#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_confirmation_token     (confirmation_token) UNIQUE
+#  index_users_on_reset_password_token   (reset_password_token) UNIQUE
+#  index_users_on_role_id_and_role_type  (role_id,role_type)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

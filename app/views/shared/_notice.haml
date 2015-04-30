@@ -1,17 +1,21 @@
--#
--# locals
--#
+.col-md-12
+  - if flash[:alert]
+    .alert.alert-danger
+      = flash[:alert]
 
-- if flash[:success]
-  .alert.alert-success
-    = flash[:success]
+  - if flash[:success]
+    .alert.alert-success
+      = flash[:success]
 
-- if flash[:notice]
-  .alert.alert-info
-    = flash[:notice]
+  - if flash[:notice]
+    .alert.alert-info
+      = flash[:notice]
 
-- if flash[:error]
-  .alert.alert-danger
-    %ul
-      = list_of flash[:error] do |error|
-        = error
+  - if flash[:error]
+    .alert.alert-danger
+      - if flash[:error].is_a? Array
+        %ul.list-unstyled
+          = list_of flash[:error] do |error|
+            = error
+      - else
+        = flash[:error]

@@ -11,8 +11,9 @@
  * file per style scope.
  *
  *= require global
- *= require bootstrap-datepicker3
  *= require chosen
+ *= require jquery.fileupload
+ *= require jquery.fileupload-ui
  *= require_tree ./public
  *= require_self
  */

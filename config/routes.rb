@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   devise_for :users, :controllers => {
     :confirmations => 'users/confirmations',
     :passwords => 'users/passwords',
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
       member do
         put 'enable'
         put 'reset_password'
+        put 'resend_confirmation'
       end
     end
 
@@ -33,6 +36,7 @@ Rails.application.routes.draw do
       member do
         put 'enable'
         put 'reset_password'
+        put 'resend_confirmation'
       end
     end
 
@@ -40,8 +44,17 @@ Rails.application.routes.draw do
       member do
         put 'enable'
         put 'reset_password'
+        put 'resend_confirmation'
       end
     end
+
+
+    # resources :users, :only => [:show, :edit, :update, :destroy] do
+    #   member do
+    #     put 'enable'
+    #     put 'reset_password'
+    #   end
+    # end
 
     root 'categories#index'
   end
@@ -53,6 +66,8 @@ Rails.application.routes.draw do
     resources :dashboard, :only => [:index]
     resources :orders,
       :only => [:index, :show, :new, :create, :edit, :update] do
+
+      resources :attachments, :only => [:create]
 
       member do
         put 'close'
@@ -66,6 +81,8 @@ Rails.application.routes.draw do
         put 'award'
       end
     end
+
+    resources :attachments, :only => [:show, :destroy]
 
     root 'dashboard#index'
   end
@@ -81,12 +98,15 @@ Rails.application.routes.draw do
 
     resources :bids, :only => [:show, :edit, :update] do
       resources :comments, :only => [:create]
+      resources :attachments, :only => [:create]
 
       member do
         put 'withdraw'
         put 'reopen'
       end
     end
+
+    resources :attachments, :only => [:show, :destroy]
 
     root 'dashboard#index'
   end

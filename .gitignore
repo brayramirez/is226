@@ -14,6 +14,7 @@
 
 config/database.yml
 config/secrets.yml
+config/aws.yml
 
 /.ruby-gemset
 /.ruby-version

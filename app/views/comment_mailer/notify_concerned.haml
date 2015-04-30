@@ -1,0 +1,14 @@
+%p Hi #{@recipient.name}!
+
+%br
+
+%p #{@comment.commenter} posted a comment to a bid for
+%p order with item #{@order.item}
+%p Details are as follows:
+%p= raw @comment.content
+
+%br
+
+%p
+  Visit bid
+  = link_to 'here', [@account, @bid]

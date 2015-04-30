@@ -44,14 +44,14 @@
   .js-bidder-category{:class => "#{'hidden' if :buyer == form.account_type.to_sym}"}
     .form-group
       = f.label :categories, :class => 'control-label col-sm-4'
-      .col-sm-8
+      .col-sm-8{:class => "#{'has-error' if @form.errors[:categories].present?}"}
         = f.select :categories,
           options_from_collection_for_select(Category.alphabetical,
             'id', 'name', form.category_ids),
           {:include_blank => true},
           :multiple => true,
           :class => 'js-chosen-select form-control',
-          :data => {:placeholder => 'Select Category'}
+          :data => {:placeholder => 'Select'}
 
   .form-group
     = f.label :company_name, :class => 'control-label col-sm-4'

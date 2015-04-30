@@ -1,5 +1,6 @@
-.page-header
-  %h1 Edit Administrator
+.col-md-12
+  .page-header
+    %h1 Edit Administrator
 
-= render :partial => 'admin/admins/partials/form',
-  :locals => {:admin => @admin}
+  = render :partial => 'admin/admins/partials/form',
+    :locals => {:form => @form}

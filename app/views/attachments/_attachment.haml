@@ -1,0 +1,17 @@
+-#
+-# locals:
+-#   attachment
+-#   account
+-#
+
+- show_delete = local_assigns[:show_delete] || false
+
+%tr
+  %td= link_to attachment, attachment.file.url, :target => '_blank'
+  %td= attachment.created_at
+  - if show_delete
+    %td
+      = link_to "<i class='glyphicon glyphicon-trash text-danger'></i>".html_safe,
+        [account, attachment],
+        :method => :delete,
+        :data => {:confirm => 'Are you sure?'}

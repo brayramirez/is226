@@ -1,0 +1,25 @@
+-#
+-# locals:
+-#   bidder
+-#   panel_class
+-#
+
+.col-md-4
+  .panel{:class => panel_class}
+    .panel-heading Bidder Details
+    .panel-body
+      %dl.dl-horizontal
+        %dt Name
+        %dd= bidder
+
+        %dt Email
+        %dd= bidder.email
+
+        %dt Company Name
+        %dd= bidder.company_name
+
+        %dt Contact Person
+        %dd= bidder.contact_person
+
+        %dt Contact Number
+        %dd= bidder.contact_number

@@ -4,19 +4,20 @@ $(document).ready(function(){
     e.preventDefault();
 
     var $form = $('.js-comment-form'),
-        $contentField = $('.js-comment-content'),
-        url = $form.prop('action'),
-        data = $form.serialize();
+        editor = CKEDITOR.instances.comment_content,
+        url = $form.prop('action');
 
-    if ($contentField.val().length === 0) {
+    if (editor.getData().length === 0) {
       console.log('empty!!');
       return;
     }
 
+    editor.updateElement();
+
     // TODO: check errors
     $.ajax({
       url: url,
-      data: data,
+      data: $form.serialize(),
       dataType: 'json',
       type: 'POST',
       success: function(result){
@@ -26,7 +27,7 @@ $(document).ready(function(){
         var $template = $(JST['comments/show'](result));
 
         $('.js-comments-container').prepend($template);
-        $contentField.val('');
+        editor.setData('');
       }
     })
   });

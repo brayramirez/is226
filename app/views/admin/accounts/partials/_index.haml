@@ -4,22 +4,23 @@
 -#   accounts
 -#
 
-.page-header
-  %h1= header
+.col-md-12
+  .page-header
+    %h1= header
 
-%table.table.table-condensed.table-striped.table-hover
-  %thead
-    %tr
-      %th Last Name
-      %th First Name
-      %th Email
-      %th
-  %tbody
-    - accounts.each do |account|
+  %table.table.table-condensed.table-striped.table-hover
+    %thead
       %tr
-        %td= account.last_name
-        %td= account.first_name
-        %td= account.email
-        %td
-          = link_to 'Show', [:admin, account],
-            :class => 'btn btn-default btn-sm'
+        %th Last Name
+        %th First Name
+        %th Email
+        %th
+    %tbody
+      - accounts.each do |account|
+        %tr
+          %td= account.last_name
+          %td= account.first_name
+          %td= account.email
+          %td
+            = link_to 'Show', [:admin, account.role],
+              :class => 'btn btn-default btn-sm'

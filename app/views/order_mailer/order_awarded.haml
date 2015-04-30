@@ -1,0 +1,26 @@
+%p Hi #{@recipient.name}!
+
+%br
+
+%p Order for Item #{@order.item} has been awarded and
+%p bidding is now closed.
+
+%br
+
+%p Order details are as follows:
+
+%dl.dl-horizontal
+  %dt Item
+  %dd= @order.item
+
+  %dt Quantity
+  %dd= @order.quantity
+
+  %dt Details
+  %dd= @order.details
+
+%br
+
+%p
+  Visit Order
+  = link_to 'here', [:bidder, @order]

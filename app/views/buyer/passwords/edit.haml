@@ -1,27 +1,28 @@
-.page-header
-  %h1 Change Password
+.col-md-12
+  .page-header
+    %h1 Change Password
 
-= form_for @form, :url => [:buyer, :password],
-  :html => {:class => 'form-horizontal'} do |f|
+  = form_for @form, :url => [:buyer, :password],
+    :html => {:class => 'form-horizontal'} do |f|
 
-  .form-group
-    = f.label :current_password, :class => 'col-sm-2 control-label'
-    .col-sm-5
-      = f.password_field :current_password, :class => 'form-control'
+    .form-group
+      = f.label :current_password, :class => 'col-sm-2 control-label'
+      .col-sm-5
+        = f.password_field :current_password, :class => 'form-control'
 
-  .form-group
-    = f.label :password, :class => 'col-sm-2 control-label'
-    .col-sm-5
-      = f.password_field :password, :class => 'form-control'
+    .form-group
+      = f.label :password, :class => 'col-sm-2 control-label'
+      .col-sm-5
+        = f.password_field :password, :class => 'form-control'
 
-  .form-group
-    = f.label :password_confirmation, :class => 'col-sm-2 control-label'
-    .col-sm-5
-      = f.password_field :password_confirmation, :class => 'form-control'
+    .form-group
+      = f.label :password_confirmation, :class => 'col-sm-2 control-label'
+      .col-sm-5
+        = f.password_field :password_confirmation, :class => 'form-control'
 
-  %hr
+    %hr
 
-  .form-group
-    .col-sm-offset-2.col-sm-5
-      = f.submit 'Save', :class => 'btn btn-primary'
-      = link_to 'Cancel', [:buyer, :my_account], :class => 'btn btn-default'
+    .form-group
+      .col-sm-offset-2.col-sm-5
+        = f.submit 'Save', :class => 'btn btn-primary'
+        = link_to 'Cancel', [:buyer, :my_account], :class => 'btn btn-default'

@@ -5,6 +5,7 @@ module Bidder
     before_action :init_new_bid, :only => [:new, :create]
     before_action :init_bid,
       :only => [:show, :edit, :update, :withdraw, :reopen]
+    before_action :init_form, :only => [:new, :create, :edit, :update]
     before_action :init_bid_support, :only => [:withdraw, :reopen]
 
 
@@ -13,28 +14,36 @@ module Bidder
 
 
     def new
+      restrict_order
     end
 
 
     def create
-      @bid.assign_attributes bid_params
+      if @form.validate params[:bid]
+        @form.save
 
-      if @bid.save
-        redirect_to [:bidder, @order]
+        flash[:success] = 'You have successfuly made a bid.'
+        redirect_to [:bidder, @form.model]
       else
+        flash[:error] = @form.errors.full_messages
         render :new
       end
     end
 
 
     def edit
+      restrict_bid
     end
 
 
     def update
-      if @bid.update_attributes bid_params
-        redirect_to [:bidder, @bid.order]
+      if @form.validate params[:bid]
+        @form.save
+
+        flash[:success] = 'You have successfuly updated your bid.'
+        redirect_to [:bidder, @form.model]
       else
+        flash[:error] = @form.errors.full_messages
         render :edit
       end
     end
@@ -65,7 +74,7 @@ module Bidder
 
 
     def init_new_bid
-      @bid = @order.bids.new :bidder => current_user
+      @bid = @order.bids.new :bidder_account => current_role
     end
 
 
@@ -79,8 +88,24 @@ module Bidder
     end
 
 
-    def bid_params
-      params.require(:bid).permit(:content)
+    def init_form
+      @form = BidForm.new @bid
+    end
+
+
+    def restrict_order
+      return if @order.open?
+
+      flash[:error] = "Order is already #{@bid.order.decorate.simple_status} and no bids can be made."
+      redirect_to [:bidder, @order]
+    end
+
+
+    def restrict_bid
+      return if @bid.editable?
+
+      flash[:error] = "Order is already #{@bid.order.decorate.simple_status} and no bids can be made."
+      redirect_to [:bidder, @bid.order]
     end
 
   end

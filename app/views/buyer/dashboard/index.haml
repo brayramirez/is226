@@ -1,38 +1,10 @@
-.row
-  .col-md-6
-    .panel.panel-primary
-      .panel-heading Open Orders for the last 7 days
-      %table.table.table-condensed.table-striped.table-hover
-        %thead
-          %tr
-            %th Item
-            %th Created At
-            %th # of Bids
-        %tbody
-          - 5.times do |i|
-            %tr
-              %td= Faker::Commerce.product_name
-              %td= i.days.ago.strftime '%B %-d, %Y'
-              %td= rand 5
+.col-md-6
+  = render :partial => 'buyer/dashboard/partials/orders',
+    :locals => {:orders => @orders.decorate}
 
-    .panel.panel-primary
-      .panel-heading Awarded Orders for the last 7 days
-      %table.table.table-condensed.table-striped.table-hover
-        %thead
-          %tr
-            %th Item
-            %th Awarded To
-        %tbody
-          - 3.times do |i|
-            %tr
-              %td= Faker::Commerce.product_name
-              %td= Faker::Company.name
+  = render :partial => 'buyer/dashboard/partials/awarded_orders',
+    :locals => {:orders => @awarded_orders.decorate}
 
-  .col-md-6
-    .panel.panel-primary
-      .panel-heading Activities for the last 7 Days
-      %ul.list-group
-        - 10.times do |i|
-          - action = ["<strong>#{Faker::Company.name}</strong> has made a bid for item <strong>#{Faker::Commerce.product_name}</strong>.", "<strong>#{Faker::Company.name}</strong> posted a comment to a bid for item <strong>#{Faker::Commerce.product_name}</strong>.", "You posted a comment to a bid for item <strong>#{Faker::Commerce.product_name}</strong>."]
-          %li.list-group-item
-            = raw action.sample
+.col-md-6
+  = render :partial => 'dashboards/activities',
+    :locals => {:activities => @activities}

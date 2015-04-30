@@ -26,9 +26,12 @@ class HomeController < ApplicationController
   protected
 
   def redirect_if_signed_in
-    if current_user && current_user.active?
-      redirect_to [:admin, :root] and return if current_user.admin?
-    end
+    return if current_user.blank?
+    return if current_user.disabled?
+
+    redirect_to [:admin, :root] and return if current_user.admin?
+    redirect_to [:bidder, :root] and return if current_user.bidder?
+    redirect_to [:buyer, :root] and return if current_user.buyer?
   end
 
 

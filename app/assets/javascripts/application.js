@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-fileupload/basic
 //= require bootstrap-sprockets
-//= require bootstrap-datepicker
+//= require ckeditor/init
 //= require chosen-jquery
 //= require handlebars
 //= require_tree ./templates

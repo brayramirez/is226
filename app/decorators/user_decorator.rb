@@ -9,12 +9,12 @@ class UserDecorator < ApplicationDecorator
 
 
   def buyer_type
-    source.buyer_type.capitalize
+    source.role.buyer_type.capitalize
   end
 
 
   def categories
-    source.categories.alphabetical.pluck(:name).join(', ')
+    source.role.decorate.categories
   end
 
 end

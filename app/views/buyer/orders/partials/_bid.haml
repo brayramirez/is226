@@ -4,12 +4,18 @@
 -#   bid
 -#
 
+- bid = bid.decorate
+
 .col-md-12
-  .panel{:class => bid.decorate.panel_class}
+  .panel{:class => bid.panel_class}
     .panel-heading
-      .pull-left Bid by #{bid.bidder}
+      .pull-left
+        Bid by #{bid.bidder}
+        - if bid.withdrawed?
+          (#{bid.status})
       .pull-right
-        = link_to 'View', [:buyer, bid], :class => 'btn btn-info btn-xs'
+        = link_to 'View', [:buyer, bid],
+          :class => 'btn btn-info btn-xs'
 
       .clearfix
 

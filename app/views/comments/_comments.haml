@@ -1,0 +1,20 @@
+-#
+-# locals:
+-#   comments
+-#
+
+.js-comments-container
+  - if comments.any?
+    - comments.by_latest.each do |comment|
+      - comment = comment.decorate
+      .comment
+        .well.well-sm
+          %blockquote
+            %p= raw comment.content
+            %footer
+              %p= comment.commenter current_user
+              %small= comment.created_at
+  - else
+    .js-no-comments
+      %h4 No Comments for this bid yet.
+
