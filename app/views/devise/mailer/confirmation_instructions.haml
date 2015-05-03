@@ -1,0 +1,17 @@
+%tr
+  %td{:style => 'padding:10px 0 40px;'}
+    Welcome
+    %strong= @email
+    ,
+
+%tr
+  %td
+    Thank you for registering!
+%tr
+  %td{:style => 'padding-bottom:20px;'}
+    You can confirm your account email through the link below:
+
+%tr
+  %td{:style => 'padding-bottom:40px;'}
+    = link_to 'Confirm my account',
+      confirmation_url(@resource, confirmation_token: @token)

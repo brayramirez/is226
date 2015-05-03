@@ -1,22 +1,31 @@
-%p Hi #{@recipient.name}!
+%tr
+  %td{:style => 'padding:10px 0 40px;'}
+    Hi
+    %strong= @recipient.name
+    ,
 
-%br
+%tr
+  %td{:style => 'padding-bottom:20px;'}
+    A bid has been made for order with item
+    %strong= link_to @order.item, [:buyer, @order]
+%tr
+  %td{:style => 'padding-bottom:10px;'}
+    Details are as follows:
 
-%p A bid has been made for order with item #{@order.item}.
-%p Details are as follows:
+%tr
+  %td
+    %strong Bidder:
+    = @bid.bidder.name
+%tr
+  %td
+    %strong Company:
+    = @bid.bidder.company_name
+%tr
+  %td
+    %strong Bid Content:
+    = raw @bid.content
 
-%dl.dl-horizontal
-  %dt Bidder
-  %dd= @bid.bidder.name
-
-  %dt Company
-  %dd= @bid.bidder.company_name
-
-  %dt Bid
-  %dd= raw @bid.content
-
-%br
-
-%p
-  Visit bid
-  = link_to 'here', [:buyer, @bid]
+%tr
+  %td{:style => 'padding:20px 0;'}
+    View bid
+    = link_to 'here', [:buyer, @bid]

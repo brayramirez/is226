@@ -1,21 +1,12 @@
-%p Hi #{@recipient.name}!
+%tr
+  %td{:style => 'padding:10px 0 40px;'}
+    Hi
+    %strong= @recipient.name
+    ,
 
-%br
+%tr
+  %td{:style => 'padding-bottom:20px;'}
+    A new order has been requested.
 
-%p A new order has been requested. Details are as follows:
-
-%dl.dl-horizontal
-  %dt Item
-  %dd= @order.item
-
-  %dt Quantity
-  %dd= @order.quantity
-
-  %dt Details
-  %dd= raw @order.details
-
-%br
-
-%p
-  Visit Order
-  = link_to 'here', [:bidder, @order]
+= render :partial => 'order_mailer/partials/order_details',
+  :locals => {:order => @order}

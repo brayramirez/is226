@@ -1,11 +1,18 @@
 class CommentMailer < ApplicationMailer
 
-  def notify_concerned recipient, comment
-    @recipient = recipient
+  def notify_concerned comment
     @comment = comment
     @bid = @comment.bid
+
+    if comment.commenter.role.is_a?(BidderAccount)
+      @recipient = @bid.order.buyer
+      @account = :buyer
+    else
+      @recipient = @bid.bidder
+      @account = :bidder
+    end
+
     @order = @bid.order
-    @account = @recipient.role.is_a?(Buyer) ? :bidder : :buyer
 
     mail :to => @recipient.email, :subject => 'Comment has been posted.'
   end
