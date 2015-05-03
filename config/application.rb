@@ -27,5 +27,10 @@ module Is226
     HandlebarsAssets::Config.template_namespace = 'JST'
 
     Reform::Form.reform_2_0!
+
+
+    config.to_prepare do
+      Devise::Mailer.layout 'mailer'
+    end
   end
 end

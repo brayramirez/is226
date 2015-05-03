@@ -1,0 +1,26 @@
+-#
+-# locals:
+-#   order
+-#
+
+%tr
+  %td{:style => 'padding-bottom:10px;'}
+    Details are as follows:
+
+%tr
+  %td
+    %strong Item:
+    = order.item
+%tr
+  %td
+    %strong Quantity:
+    = order.quantity
+%tr
+  %td
+    %strong Details:
+    = order.details
+
+%tr
+  %td{:style => 'padding:20px 0;'}
+    View order
+    = link_to 'here', [:bidder, order]
