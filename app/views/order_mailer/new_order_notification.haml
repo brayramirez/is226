@@ -9,4 +9,4 @@
     A new order has been requested.
 
 = render :partial => 'order_mailer/partials/order_details',
-  :locals => {:order => @order}
+  :locals => {:order => @order.decorate}

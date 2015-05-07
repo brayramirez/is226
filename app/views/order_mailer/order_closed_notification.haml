@@ -11,4 +11,4 @@
     has been closed and no bidding can be made.
 
 = render :partial => 'order_mailer/partials/order_details',
-  :locals => {:order => @order}
+  :locals => {:order => @order.decorate}
