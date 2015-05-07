@@ -11,4 +11,4 @@
     has been awarded and bidding is now closed.
 
 = render :partial => 'order_mailer/partials/order_details',
-  :locals => {:order => @order}
+  :locals => {:order => @order.decorate}

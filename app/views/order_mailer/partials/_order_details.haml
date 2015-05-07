@@ -17,8 +17,16 @@
     = order.quantity
 %tr
   %td
+    %strong Target Date:
+    = order.target_date
+%tr
+  %td
+    %strong Categories:
+    = order.categories
+%tr
+  %td
     %strong Details:
-    = order.details
+    = raw order.details
 
 %tr
   %td{:style => 'padding:20px 0;'}
