@@ -1,12 +1,16 @@
 .col-md-6
-  %h1 Welcome!!
+  %h1 Welcome to Supply Procurement System!
 
   %br
 
   .lead
-    = Faker::Lorem.paragraph 4
-  .lead
-    = Faker::Lorem.paragraph 4
+    Searching for Suppliers made easier!
+
+  .pull-right
+    %small
+      = '- IS226 Web Information System - UP Open University'
+
+  .clearfix
 
 .col-md-6
   = render :partial => 'shared/signup', :locals => {:form => @form}
